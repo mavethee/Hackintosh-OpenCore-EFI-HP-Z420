@@ -5,7 +5,7 @@ EFI premade of OpenCore bootloader for HP-Z420 is here!
 
 ## Current version - OpenCore 0.7.7 (11th January 2022!)
 Repository contains full ,,Plug-and-Play" EFI of OpenCore bootloader and
-all needed files to install and run macOS on DELL Inspiron 15 7000 Gaming (7567)!
+all needed files to install and run macOS on HP Z420!
 
 https://github.com/acidanthera/OpenCorePkg/releases/tag/0.7.7
 
