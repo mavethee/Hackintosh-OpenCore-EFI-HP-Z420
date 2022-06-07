@@ -16,6 +16,9 @@ Internal USBs doesnt work so USBInjectAll was skipped!
 For working USBs I used this PCIe expansion card (native support, no kexts needed):
 https://www.amazon.pl/Inateck-Karta-USB-porty-ExpresCard/dp/B00HJ1DULE?th=1
 
+OCLP DOESN'T WORK FOR MACOS 13, USE MACPRO7,1 SMBIOS AND NATIVELY SUPPORTED DGPU!
+Memory mismatch error fix: https://dortania.github.io/OpenCore-Post-Install/universal/memory.html
+
 ### SMBIOS:
 Present in repo SMBIOS is not purchased Apple's device but for own sake, I don't advice you to use it.
 ...for own sake ;)
