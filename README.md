@@ -7,7 +7,7 @@ EFI premade of OpenCore bootloader for HP-Z420 is here!
 Repository contains full ,,Plug-and-Play" EFI of OpenCore bootloader and
 all needed files to install and run macOS on HP Z420!
 
-https://github.com/acidanthera/OpenCorePkg/releases/tag/0.8.0
+https://github.com/acidanthera/OpenCorePkg/releases/tag/0.8.1
 
 I've used natively supported GPU, you should too ;)
 
