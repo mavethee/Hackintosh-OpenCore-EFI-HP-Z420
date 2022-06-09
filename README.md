@@ -3,7 +3,7 @@
 ## Hackintosh-OpenCore-HP-Z420
 EFI premade of OpenCore bootloader for HP-Z420 is here!
 
-## Current version - OpenCore 0.8.0 DEBUG
+## Current version - OpenCore 0.8.1 DEBUG
 Repository contains full ,,Plug-and-Play" EFI of OpenCore bootloader and
 all needed files to install and run macOS on HP Z420!
 
@@ -18,6 +18,9 @@ https://www.amazon.pl/Inateck-Karta-USB-porty-ExpresCard/dp/B00HJ1DULE?th=1
 
 OCLP DOESN'T WORK FOR MACOS 13, USE MACPRO7,1 SMBIOS AND NATIVELY SUPPORTED DGPU!
 Memory mismatch error fix: https://dortania.github.io/OpenCore-Post-Install/universal/memory.html
+Or just use RestrictEvents included in Kexts.
+
+There are some issues in macOS 13 related to lack of AVX2 instruction set, requires more fun with macOS 13 beta 1 installer, at own risk lol.
 
 ### SMBIOS:
 Present in repo SMBIOS is not purchased Apple's device but for own sake, I don't advice you to use it.
