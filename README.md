@@ -7,18 +7,7 @@ EFI premade of OpenCore bootloader for HP-Z420 is here!
 Repository contains full ,,Plug-and-Play" EFI of OpenCore bootloader and
 all needed files to install and run macOS on HP Z420!
 
-<<<<<<< Updated upstream
-https://github.com/acidanthera/OpenCorePkg/releases/tag/0.8.1
-
-I've used natively supported GPU, you should too ;)
-
-Internal USBs doesnt work so USBInjectAll was skipped!
-
-For working USBs I used this PCIe expansion card (native support, no kexts needed):
-https://www.amazon.pl/Inateck-Karta-USB-porty-ExpresCard/dp/B00HJ1DULE?th=1
-=======
 https://dortania.github.io/builds/
->>>>>>> Stashed changes
 
 OCLP DOESN'T WORK FOR MACOS 13, USE MACPRO7,1 SMBIOS AND NATIVELY SUPPORTED DGPU!
 Memory mismatch error fix: https://dortania.github.io/OpenCore-Post-Install/universal/memory.html
