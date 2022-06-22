@@ -20,8 +20,12 @@ https://github.com/corpnewt/USBMap/blob/master/README.md#quick-start
 For working USB 3.0 I used this PCIe expansion card (native support, no kexts needed), although keep figuring out why BIOS doesn't care about it, appears only on OS level:
 https://www.amazon.pl/Inateck-Karta-USB-porty-ExpresCard/dp/B00HJ1DULE?th=1
 
-There are some issues in macOS 13 related to lack of AVX2 instruction set, requires more fun with macOS 13 beta 1 installer, at own risk lol.
+There are some issues in macOS 13 related to lack of AVX2 instruction set, requires more fun with macOS 13 beta 2 installer, at own risk lol.
 You need M1s dylds cache as its non AVX2 cache to boot successfully!
+https://github.com/dortania/OpenCore-Legacy-Patcher/issues/998#issuecomment-1163607808
+(Turns out you can extract ipsw file from Apple Developer site or use link below):
+https://updates.cdn-apple.com/2022SummerSeed/fullrestores/012-30346/9DD787A7-044B-4650-86D4-84E80B6B9C36/UniversalMac_13.0_22A5286j_Restore.ipsw
+
 
 See:
 https://github.com/dortania/OpenCore-Legacy-Patcher/issues/998
