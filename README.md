@@ -3,11 +3,11 @@
 ## Hackintosh-OpenCore-HP-Z420
 EFI premade of OpenCore bootloader for HP-Z420 is here!
 
-## Current version - OpenCore 0.8.2 DEBUG (DEV) - REMEBER TO TRACK UPDATES ON DORTANIA BLOG TILL OFFICIAL RELEASE!
+## Current version - OpenCore 0.8.2 DEBUG
 Repository contains full ,,Plug-and-Play" EFI of OpenCore bootloader and
 all needed files to install and run macOS on HP Z420!
 
-https://dortania.github.io/builds/
+https://github.com/acidanthera/OpenCorePkg/releases/tag/0.8.2
 
 ## USB issues (need help and contributors):
 
