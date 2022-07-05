@@ -67,7 +67,7 @@ OCLP DOESN'T WORK FOR MACOS 13, USE MACPRO7,1 SMBIOS ~~AND NATIVELY SUPPORTED DG
 
 New sad findings, even if natively supported dGPU will be used, you're out of luck as GPU accel require AVX2:
 
-https://github.com/dortania/OpenCore-Legacy-Patcher/issues/998#issuecomment-1165304539
+https://github.com/dortania/OpenCore-Legacy-Patcher/issues/998#issuecomment-1166340370
 
 Memory mismatch error fix:
 
