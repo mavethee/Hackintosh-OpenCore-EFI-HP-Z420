@@ -63,6 +63,10 @@ https://mrmacintosh.com/macos-12-monterey-full-installer-database-download-direc
 
 ## Ventura NOTE - OCLP status, GPUs and why everything is enabled again...
 
+FOR MACOS 13 BETA 3 AND NEWER USE 0.8.3+ (ROLLING RELEASES OF OPENCORE AND KEXTS CURRENTLY!)
+
+https://dortania.github.io/builds/
+
 OCLP DOESN'T WORK FOR MACOS 13, USE MACPRO7,1 SMBIOS ~~AND NATIVELY SUPPORTED DGPU!~~
 
 New sad findings, even if natively supported dGPU will be used, you're out of luck as GPU accel require AVX2:
@@ -75,14 +79,14 @@ https://dortania.github.io/OpenCore-Post-Install/universal/memory.html
 
 Or just use RestrictEvents included in Kexts.
 
-Lack of AVX2 instruction set requires more fun with macOS 13 beta 2 installer, so be aware!
+Lack of AVX2 instruction set requires more fun with macOS 13 installation, so be aware!
 You need M1s dylds cache as its non AVX2 cache to boot successfully!
 
 https://github.com/dortania/OpenCore-Legacy-Patcher/issues/998#issuecomment-1163607808
 
 You can extract ipsw file from Apple Developer site or use link below:
 
-https://updates.cdn-apple.com/2022SummerSeed/fullrestores/012-30346/9DD787A7-044B-4650-86D4-84E80B6B9C36/UniversalMac_13.0_22A5286j_Restore.ipsw
+https://mrmacintosh.com/apple-silicon-m1-full-macos-restore-ipsw-firmware-files-database/
 
 I've already applied mentioned patch for 'Root Hash verification' into config.plist but dylds with every update must be done manaully on your end.
 
