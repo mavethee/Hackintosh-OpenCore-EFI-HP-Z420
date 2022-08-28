@@ -9,6 +9,8 @@ all needed files to install and run macOS on HP Z420!
 
 https://github.com/acidanthera/OpenCorePkg/releases/tag/0.8.3
 
+<img src="https://media.discordapp.net/attachments/724306793819275309/1013378822239944814/unknown.png">
+
 ## USB issues (need help and contributors):
 
 Internal USB 3.0 doesnt work although USB 2.0 ones should work, I have no idea why but since switched to MacPro7,1, USB mapping actually does something so uploading USB map kexts in case it does something with your machine! ^^ 
@@ -123,8 +125,6 @@ Add `amfi_get_out_of_my_way=1 ipc_control_port_options=0` to `NVRAM -> Add -> 7C
 6. Follow OCLP prompts and reboot.
 
 Done! GPU acceleration in Ventura is working!
-
-<img src="https://media.discordapp.net/attachments/724306793819275309/1013378822239944814/unknown.png">
 
 ### SMBIOS:
 Present in repo SMBIOS is not purchased Apple's device but for own sake, I don't advice you to use it.
