@@ -1,13 +1,13 @@
 <img src="https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/Logos/OpenCore_with_text_Small.png" width="200" height="48"/>
 
 ## Hackintosh-OpenCore-HP-Z420
-EFI premade of OpenCore bootloader for HP-Z420 is here!
+EFI premade of OpenCore bootloader for HP-Z420 is here and it runs Ventura!
 
-## Current version - OpenCore 0.8.2 DEBUG
+## Current version - OpenCore 0.8.3 DEBUG
 Repository contains full ,,Plug-and-Play" EFI of OpenCore bootloader and
 all needed files to install and run macOS on HP Z420!
 
-https://github.com/acidanthera/OpenCorePkg/releases/tag/0.8.2
+https://github.com/acidanthera/OpenCorePkg/releases/tag/0.8.3
 
 ## USB issues (need help and contributors):
 
@@ -22,9 +22,11 @@ https://www.amazon.pl/Inateck-Karta-USB-porty-ExpresCard/dp/B00HJ1DULE?th=1
 
 ## Monterey NOTE:
 
-Current config is cleared out from OCLP specific options so if you don't need OCLP to patch your dGPU, **you're good to go.**
+Current config is prepared for booting Ventura so if you want to run Monterey with supported dGPU, **revert Ventura NOTE steps.**
 
-Stay on MacPro7,1 for USB mapping sake as explained above.
+For unsupported dGPU, follow the steps below:
+
+- Stay on MacPro7,1 for USB mapping sake as explained above.
 
 But if you have Kepler or some other dropped dGPU you have to sacrifice a few things:
 
@@ -37,14 +39,18 @@ But if you have Kepler or some other dropped dGPU you have to sacrifice a few th
 ## OCLP preparation:
 
 1. SET SIP to 0x802:
+
 `NVRAM -> Add -> 7C436110-AB2A-4BBB-A880-FE41995C9F82 -> csr-active-config` to `02080000`
 
 2. Disable Apple Secure Boot:
+
 `Misc -> Security -> SecureBootModel` to `Disable` 
 
-3. Reset NVRAM using `ResetNvramEntry.efi` in `EFI\OC\DRIVERS`
+`Misc -> Security -> DmgLoading` to `Any`
 
-4. (Optional) For auto root patching your unsupported dGPU generate `AutoPkgInstaller.kext` and add it to your `EFI\OC\KEXTS`:
+4. Reset NVRAM using `ResetNvramEntry.efi` in `EFI\OC\DRIVERS`
+
+5. (Optional) For auto root patching your unsupported dGPU generate `AutoPkgInstaller.kext` and add it to your `EFI\OC\KEXTS`:
 
 - Launch OCLP,
 
@@ -54,6 +60,8 @@ But if you have Kepler or some other dropped dGPU you have to sacrifice a few th
 
 - Flash config.plist with generated kext, reboot to check if it works.
 
+6. Follow OCLP prompts and reboot.
+
 Done! GPU acceleration in Monterey is back again! 
 
 Downside is need to every time gather InstallerAssistants.pkg from e.g. MrMacintosh's blog:
@@ -61,26 +69,17 @@ https://mrmacintosh.com/macos-12-monterey-full-installer-database-download-direc
 
 (Thats if you choose to stay with MacPro7,1!)
 
-## Ventura NOTE - OCLP status, GPUs and why everything is enabled again...
+## Ventura NOTE - OCLP status and the 'how to'...
 
-FOR MACOS 13 BETA 3 AND NEWER USE 0.8.3+ (ROLLING RELEASES OF OPENCORE AND KEXTS CURRENTLY!)
+Source: https://github.com/dortania/OpenCore-Legacy-Patcher/issues/998
 
-https://dortania.github.io/builds/
+For macOS 13 B3+ use OpenCore 0.8.3+
 
-OCLP DOESN'T WORK FOR MACOS 13, USE MACPRO7,1 SMBIOS ~~AND NATIVELY SUPPORTED DGPU!~~
-
-New sad findings, even if natively supported dGPU will be used, you're out of luck as GPU accel require AVX2:
+1. Natively supported dGPUs require AVX2 support so you are dependent only on Legacy Metal dGPU and OCLP!
 
 https://github.com/dortania/OpenCore-Legacy-Patcher/issues/998#issuecomment-1166340370
 
-Memory mismatch error fix:
-
-https://dortania.github.io/OpenCore-Post-Install/universal/memory.html
-
-Or just use RestrictEvents included in Kexts.
-
-Lack of AVX2 instruction set requires more fun with macOS 13 installation, so be aware!
-You need M1s dylds cache as its non AVX2 cache to boot successfully!
+2. Lack of AVX2 instruction set requires more fun with macOS 13 installation, so be aware! You need M1s dylds cache as its non AVX2 cache to boot successfully!
 
 https://github.com/dortania/OpenCore-Legacy-Patcher/issues/998#issuecomment-1163607808
 
@@ -90,11 +89,42 @@ https://mrmacintosh.com/apple-silicon-m1-full-macos-restore-ipsw-firmware-files-
 
 I've already applied mentioned patch for 'Root Hash verification' into config.plist but dylds with every update must be done manaully on your end.
 
-Source: https://github.com/dortania/OpenCore-Legacy-Patcher/issues/998
+3. OCLP now works with Ventura but its still in development and aside beta OS bugs you will gonna have also bugs related to your legacy Metal dGPU:
 
-<img src="https://cdn.discordapp.com/attachments/724306793819275309/989151977759989760/unknown.png">
+https://github.com/dortania/OpenCore-Legacy-Patcher/actions?query=branch%3Aventura-alpha
 
-(I used GT 640 so its pretty much unsupported as I mentioned above plus neofetch got confused since I installed it on DELL Optiplex 3050 and just swapped disks)
+4. OCLP preparation (already applied, listing to actually teach you something):
+
+1. SET SIP to 0xA03:
+
+`NVRAM -> Add -> 7C436110-AB2A-4BBB-A880-FE41995C9F82 -> csr-active-config` to `030A0000`
+
+2. Disable Apple Secure Boot:
+
+`Misc -> Security -> SecureBootModel` to `Disable` 
+
+`Misc -> Security -> DmgLoading` to `Any`
+
+3. Disable AMFI (+Fix for Electron apps on 12.3+):
+Add `amfi_get_out_of_my_way=1 ipc_control_port_options=0` to `NVRAM -> Add -> 7C436110-AB2A-4BBB-A880-FE41995C9F82 -> boot-args`
+
+4. Reset NVRAM using `ResetNvramEntry.efi` in `EFI\OC\DRIVERS`
+
+5. (Optional) For auto root patching your unsupported dGPU generate `AutoPkgInstaller.kext` and add it to your `EFI\OC\KEXTS`:
+
+- Launch OCLP,
+
+- Generate EFI for Mac that has something simular to your dGPU,
+
+- Do not install generated EFI anywhere, copy temp location and get the kext!
+
+- Flash config.plist with generated kext, reboot to check if it works.
+
+6. Follow OCLP prompts and reboot.
+
+Done! GPU acceleration in Ventura is working!
+
+<img src="https://media.discordapp.net/attachments/724306793819275309/1013378822239944814/unknown.png">
 
 ### SMBIOS:
 Present in repo SMBIOS is not purchased Apple's device but for own sake, I don't advice you to use it.
@@ -121,8 +151,6 @@ https://github.com/acidanthera/HibernationFixup
 https://github.com/acidanthera/VirtualSMC
 ### WhateverGreen:
 https://github.com/acidanthera/WhateverGreen
-### FeatureUnlock:
-https://github.com/acidanthera/FeatureUnlock
 ### OpenCanopy's resources:
 https://github.com/acidanthera/OcBinaryData
 ### OpenCore Legacy Patcher:
