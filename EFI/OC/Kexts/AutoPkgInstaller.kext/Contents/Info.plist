@@ -3,27 +3,27 @@
 <plist version="1.0">
 <dict>
 	<key>BuildMachineOSBuild</key>
-	<string>20G624</string>
+	<string>20G527</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleExecutable</key>
-	<string>FeatureUnlock</string>
+	<string>AutoPkgInstaller</string>
 	<key>CFBundleIdentifier</key>
-	<string>com.khronokernel.FeatureUnlock</string>
+	<string>com.khronokernel.AutoPkgInstaller</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
-	<string>FeatureUnlock</string>
+	<string>AutoPkgInstaller</string>
 	<key>CFBundlePackageType</key>
 	<string>KEXT</string>
 	<key>CFBundleShortVersionString</key>
-	<string>1.0.9</string>
+	<string>1.0.0</string>
 	<key>CFBundleSupportedPlatforms</key>
 	<array>
 		<string>MacOSX</string>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>1.0.9</string>
+	<string>1.0.0</string>
 	<key>DTCompiler</key>
 	<string>com.apple.compilers.llvm.clang.1_0</string>
 	<key>DTPlatformBuild</key>
@@ -42,14 +42,14 @@
 	<string>13C100</string>
 	<key>IOKitPersonalities</key>
 	<dict>
-		<key>FeatureUnlock</key>
+		<key>AutoPkgInstaller</key>
 		<dict>
 			<key>CFBundleIdentifier</key>
-			<string>com.khronokernel.FeatureUnlock</string>
+			<string>com.khronokernel.AutoPkgInstaller</string>
 			<key>IOClass</key>
-			<string>FeatureUnlock</string>
+			<string>AutoPkgInstaller</string>
 			<key>IOMatchCategory</key>
-			<string>FeatureUnlock</string>
+			<string>AutoPkgInstaller</string>
 			<key>IOProviderClass</key>
 			<string>IOResources</string>
 			<key>IOResourceMatch</key>
@@ -59,7 +59,7 @@
 	<key>LSMinimumSystemVersion</key>
 	<string>10.14</string>
 	<key>NSHumanReadableCopyright</key>
-	<string>Copyright © 2021 Khronokernel. All rights reserved.</string>
+	<string>Copyright © 2022 Khronokernel. All rights reserved.</string>
 	<key>OSBundleLibraries</key>
 	<dict>
 		<key>as.vit9696.Lilu</key>
