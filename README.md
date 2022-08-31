@@ -87,7 +87,7 @@ https://github.com/dortania/OpenCore-Legacy-Patcher/issues/998#issuecomment-1163
 
 You can extract ipsw file from Apple Developer site or use link below:
 
-https://mrmacintosh.com/apple-silicon-m1-full-macos-restore-ipsw-firmware-files-database/
+https://www.theiphonewiki.com/wiki/Beta_Firmware/Mac/13.x
 
 I've already applied mentioned patch for 'Root Hash verification' into config.plist but dylds with every update must be done manaully on your end.
 
