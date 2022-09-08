@@ -28,18 +28,6 @@ Current config is prepared for booting Ventura so if you want to run Monterey wi
 
 For unsupported dGPU, follow the steps below:
 
-- Stay on MacPro7,1 for USB mapping sake as explained above.
-
-But if you have Kepler or some other dropped dGPU you have to sacrifice a few things:
-
-- No OTA updates or full updates at all due to Apple Secure Boot disabled and custom SIP on T2 SMBIOS
-
-  **OR**
-
-- Break USB Mapping with MacPro6,1 SMBIOS to have OTA updates despite Apple Secure Boot disabled and custom SIP on T2 SMBIOS
-
-## OCLP preparation:
-
 1. SET SIP to 0x802:
 
 `NVRAM -> Add -> 7C436110-AB2A-4BBB-A880-FE41995C9F82 -> csr-active-config` to `02080000`
