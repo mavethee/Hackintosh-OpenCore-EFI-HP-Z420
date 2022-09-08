@@ -682,7 +682,7 @@
                     <key>SystemAudioVolume</key>
                     <data>Rg==</data>
                     <key>boot-args</key>
-                    <string>-v keepsyms=1 debug=0x100 npci=0x2000 amfi_get_out_of_my_way=1 ipc_control_port_options=0 revpatch=sbvmm alcid=66</string>
+                    <string>-v keepsyms=1 debug=0x100 npci=0x2000 amfi_get_out_of_my_way=1 ipc_control_port_options=0 revpatch=sbvmm,pci,memory alcid=66</string>
                     <key>csr-active-config</key>
                     <data>AwoAAA==</data>
                     <key>run-efi-updater</key>
