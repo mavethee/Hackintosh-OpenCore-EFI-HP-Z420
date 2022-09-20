@@ -82,7 +82,7 @@ https://github.com/dortania/OpenCore-Legacy-Patcher/actions?query=branch%3Aventu
 
 1. SET SIP to 0xA03:
 
-`NVRAM -> Add -> 7C436110-AB2A-4BBB-A880-FE41995C9F82 -> csr-active-config` to `030A0000`
+`NVRAM -> Add -> 7C436110-AB2A-4BBB-A880-FE41995C9F82 -> csr-active-config` to `03080000`
 
 2. Disable Apple Secure Boot:
 
