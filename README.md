@@ -39,19 +39,13 @@ For unsupported dGPU, follow the steps below:
 
 `Misc -> Security -> DmgLoading` to `Any`
 
-4. Reset NVRAM using `ResetNvramEntry.efi` in `EFI\OC\DRIVERS`
+3. Reset NVRAM using `ResetNvramEntry.efi` in `EFI\OC\DRIVERS`
 
-5. (Optional) For auto root patching your unsupported dGPU generate `AutoPkgInstaller.kext` and add it to your `EFI\OC\KEXTS`:
+3. (Optional) For auto root patching your unsupported dGPU - add `AutoPkgInstaller.kext` to your `EFI\OC\KEXTS`:
 
-- Launch OCLP,
+https://github.com/dortania/OpenCore-Legacy-Patcher/blob/main/payloads/Kexts/Acidanthera/AutoPkgInstaller-v1.0.0-DEBUG.zip
 
-- Generate EFI for Mac that has something simular to your dGPU,
-
-- Do not install generated EFI anywhere, copy temp location and get the kext!
-
-- Flash config.plist with generated kext, reboot to check if it works.
-
-6. Follow OCLP prompts and reboot.
+4. Follow OCLP prompts and reboot.
 
 Done! GPU acceleration in Monterey is back again! 
 
@@ -88,7 +82,7 @@ https://github.com/dortania/OpenCore-Legacy-Patcher/actions?query=branch%3Aventu
 
 1. SET SIP to 0xA03:
 
-`NVRAM -> Add -> 7C436110-AB2A-4BBB-A880-FE41995C9F82 -> csr-active-config` to `030A0000`
+`NVRAM -> Add -> 7C436110-AB2A-4BBB-A880-FE41995C9F82 -> csr-active-config` to `03080000`
 
 2. Disable Apple Secure Boot:
 
@@ -103,13 +97,7 @@ Add `amfi_get_out_of_my_way=1 ipc_control_port_options=0` to `NVRAM -> Add -> 7C
 
 5. (Optional) For auto root patching your unsupported dGPU generate `AutoPkgInstaller.kext` and add it to your `EFI\OC\KEXTS`:
 
-- Launch OCLP,
-
-- Generate EFI for Mac that has something simular to your dGPU,
-
-- Do not install generated EFI anywhere, copy temp location and get the kext!
-
-- Flash config.plist with generated kext, reboot to check if it works.
+https://github.com/dortania/OpenCore-Legacy-Patcher/blob/ventura-alpha/payloads/Kexts/Acidanthera/AutoPkgInstaller-v1.0.1-DEBUG.zip
 
 6. Follow OCLP prompts and reboot.
 
