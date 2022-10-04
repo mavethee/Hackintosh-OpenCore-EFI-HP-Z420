@@ -105,7 +105,7 @@
                     <key>Count</key>
                     <integer>0</integer>
                     <key>Enabled</key>
-                    <true/>
+                    <false/>
                     <key>Find</key>
                     <data>WEhDMQ==</data>
                     <key>Limit</key>
@@ -135,7 +135,7 @@
                     <key>Count</key>
                     <integer>0</integer>
                     <key>Enabled</key>
-                    <true/>
+                    <false/>
                     <key>Find</key>
                     <data>RUhDMQ==</data>
                     <key>Limit</key>
@@ -381,6 +381,24 @@
                     <key>Arch</key>
                     <string>Any</string>
                     <key>BundlePath</key>
+                    <string>CryptexFixup.kext</string>
+                    <key>Comment</key>
+                    <string>V1.0.0 | CryptexFixup.kext</string>
+                    <key>Enabled</key>
+                    <true/>
+                    <key>ExecutablePath</key>
+                    <string>Contents/MacOS/CryptexFixup</string>
+                    <key>MaxKernel</key>
+                    <string></string>
+                    <key>MinKernel</key>
+                    <string></string>
+                    <key>PlistPath</key>
+                    <string>Contents/Info.plist</string>
+                </dict>
+                <dict>
+                    <key>Arch</key>
+                    <string>Any</string>
+                    <key>BundlePath</key>
                     <string>HibernationFixup.kext</string>
                     <key>Comment</key>
                     <string>V1.4.6 | HibernationFixup.kext</string>
@@ -451,6 +469,66 @@
             <array/>
             <key>Patch</key>
             <array>
+                <dict>
+                    <key>Arch</key>
+                    <string>x86_64</string>
+                    <key>Base</key>
+                    <string>_cs_require_lv</string>
+                    <key>Comment</key>
+                    <string>Disable Library Validation Enforcement</string>
+                    <key>Count</key>
+                    <integer>0</integer>
+                    <key>Enabled</key>
+                    <false/>
+                    <key>Find</key>
+                    <data></data>
+                    <key>Identifier</key>
+                    <string>kernel</string>
+                    <key>Limit</key>
+                    <integer>0</integer>
+                    <key>Mask</key>
+                    <data></data>
+                    <key>MaxKernel</key>
+                    <string></string>
+                    <key>MinKernel</key>
+                    <string>20.0.0</string>
+                    <key>Replace</key>
+                    <data>uAAAAADD</data>
+                    <key>ReplaceMask</key>
+                    <data></data>
+                    <key>Skip</key>
+                    <integer>0</integer>
+                </dict>
+                <dict>
+                    <key>Arch</key>
+                    <string>x86_64</string>
+                    <key>Base</key>
+                    <string>__ZL22_vnode_check_signatureP5vnodeP5labeliP7cs_blobPjS5_ijPPcPm</string>
+                    <key>Comment</key>
+                    <string>Disable _csr_check() in _vnode_check_signature</string>
+                    <key>Count</key>
+                    <integer>1</integer>
+                    <key>Enabled</key>
+                    <false/>
+                    <key>Find</key>
+                    <data>AQAAAOgAAAAAhcB1</data>
+                    <key>Identifier</key>
+                    <string>com.apple.driver.AppleMobileFileIntegrity</string>
+                    <key>Limit</key>
+                    <integer>0</integer>
+                    <key>Mask</key>
+                    <data>//////8AAAAA////</data>
+                    <key>MaxKernel</key>
+                    <string></string>
+                    <key>MinKernel</key>
+                    <string>22.0.0</string>
+                    <key>Replace</key>
+                    <data>AQAAALgBAAAAhcB1</data>
+                    <key>ReplaceMask</key>
+                    <data></data>
+                    <key>Skip</key>
+                    <integer>0</integer>
+                </dict>
                 <dict>
                     <key>Arch</key>
                     <string>x86_64</string>
@@ -527,7 +605,7 @@
                 <key>ThirdPartyDrives</key>
                 <false/>
                 <key>XhciPortLimit</key>
-                <true/>
+                <false/>
             </dict>
             <key>Scheme</key>
             <dict>
@@ -587,7 +665,7 @@
                 <key>DisplayLevel</key>
                 <integer>2147483650</integer>
                 <key>LogModules</key>
-                <string></string>
+                <string>*</string>
                 <key>SysReport</key>
                 <false/>
                 <key>Target</key>
@@ -682,9 +760,9 @@
                     <key>SystemAudioVolume</key>
                     <data>Rg==</data>
                     <key>boot-args</key>
-                    <string>-v keepsyms=1 debug=0x100 npci=0x2000 amfi_get_out_of_my_way=1 ipc_control_port_options=0 revpatch=sbvmm,pci,memory alcid=66</string>
+                    <string>-v keepsyms=1 debug=0x100 npci=0x2000 amfi=0x80 ipc_control_port_options=0 revpatch=sbvmm,pci,memory alcid=66</string>
                     <key>csr-active-config</key>
-                    <data>AwoAAA==</data>
+                    <data>AwgAAA==</data>
                     <key>run-efi-updater</key>
                     <string>No</string>
                 </dict>
@@ -708,33 +786,7 @@
             <key>LegacyOverwrite</key>
             <false/>
             <key>LegacySchema</key>
-            <dict>
-                <key>7C436110-AB2A-4BBB-A880-FE41995C9F82</key>
-                <array>
-                    <string>EFILoginHiDPI</string>
-                    <string>EFIBluetoothDelay</string>
-                    <string>LocationServicesEnabled</string>
-                    <string>SystemAudioVolume</string>
-                    <string>SystemAudioVolumeDB</string>
-                    <string>SystemAudioVolumeSaved</string>
-                    <string>bluetoothActiveControllerInfo</string>
-                    <string>bluetoothInternalControllerInfo</string>
-                    <string>flagstate</string>
-                    <string>fmm-computer-name</string>
-                    <string>fmm-mobileme-token-FMM</string>
-                    <string>fmm-mobileme-token-FMM-BridgeHasAccount</string>
-                    <string>nvda_drv</string>
-                    <string>prev-lang:kbd</string>
-                </array>
-                <key>8BE4DF61-93CA-11D2-AA0D-00E098032B8C</key>
-                <array>
-                    <string>Boot0080</string>
-                    <string>Boot0081</string>
-                    <string>Boot0082</string>
-                    <string>BootNext</string>
-                    <string>BootOrder</string>
-                </array>
-            </dict>
+            <dict/>
             <key>WriteFlash</key>
             <true/>
         </dict>
@@ -749,13 +801,13 @@
                 <key>AdviseFeatures</key>
                 <true/>
                 <key>MLB</key>
-                <string>F5K203902GUK3F7AD</string>
+                <string>F5K1437004NK3F71H</string>
                 <key>MaxBIOSVersion</key>
                 <false/>
                 <key>ProcessorType</key>
                 <integer>0</integer>
                 <key>ROM</key>
-                <data>wORnEu0t</data>
+                <data>gbzt7/yD</data>
                 <key>SpoofVendor</key>
                 <true/>
                 <key>SystemMemoryStatus</key>
@@ -763,9 +815,9 @@
                 <key>SystemProductName</key>
                 <string>MacPro7,1</string>
                 <key>SystemSerialNumber</key>
-                <string>F5KH4080P7QM</string>
+                <string>F5KGL3ZHP7QM</string>
                 <key>SystemUUID</key>
-                <string>1B7C83F9-2BEB-4221-B35F-C5A8E135545B</string>
+                <string>09DA3731-AC7D-42F9-A183-23D7D34005B7</string>
             </dict>
             <key>UpdateDataHub</key>
             <true/>
@@ -947,7 +999,7 @@
                     <key>Arguments</key>
                     <string></string>
                     <key>Comment</key>
-                    <string></string>
+                    <string>XhciDxe.efi</string>
                     <key>Enabled</key>
                     <true/>
                     <key>LoadEarly</key>

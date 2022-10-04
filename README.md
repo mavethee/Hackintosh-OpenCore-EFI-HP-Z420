@@ -3,11 +3,11 @@
 ## Hackintosh-OpenCore-HP-Z420
 EFI premade of OpenCore bootloader for HP-Z420 is here and it runs Ventura!
 
-## Current version - OpenCore 0.8.4 DEBUG
+## Current version - OpenCore 0.8.5 DEBUG
 Repository contains full ,,Plug-and-Play" EFI of OpenCore bootloader and
 all needed files to install and run macOS on HP Z420!
 
-https://github.com/acidanthera/OpenCorePkg/releases/tag/0.8.4
+https://github.com/acidanthera/OpenCorePkg/releases/tag/0.8.5
 
 <img src="https://media.discordapp.net/attachments/576381585310482443/1017518234729197698/Zrzut_ekranu_2022-09-8_o_21.32.22.png">
 <img src="https://media.discordapp.net/attachments/724306793819275309/1013378822239944814/unknown.png">
@@ -70,9 +70,9 @@ For macOS 13 B3+ use OpenCore 0.8.3+
 
 https://github.com/dortania/OpenCore-Legacy-Patcher/issues/998#issuecomment-1166340370
 
-2. Lack of AVX2 instruction set requires more fun with macOS 13 installation, so be aware! You need M1s dylds cache as its non AVX2 cache to boot successfully!
+Side note: Polaris dGPUs DO work at some point, but it's early stage and not recommended to use for now.
 
-https://github.com/dortania/OpenCore-Legacy-Patcher/issues/998#issuecomment-1163607808
+2. Lack of AVX2 instruction set requires more fun with macOS 13 installation, so be aware! You need CryptexFixup to even boot!
 
 You can extract ipsw file from Apple Developer site or use link below:
 
@@ -129,18 +129,21 @@ Tool doesn't matter really, you just need not valid or unused SMBIOS to copy-pas
 ...if you wish to use iServices of course :)
 
 ## Credits:
-
-### Lilu:
-https://github.com/acidanthera/Lilu/
-### IntelMausi:
-https://github.com/acidanthera/IntelMausi
+### AutoPkgInstaller:
+https://github.com/dortania/OpenCore-Legacy-Patcher/blob/main/payloads/Kexts/Acidanthera/AutoPkgInstaller-v1.0.0-DEBUG.zip
+### CryptexFixup:
+https://github.com/acidanthera/CryptexFixup
 ### HibernationFixup:
 https://github.com/acidanthera/HibernationFixup
-### VirtualSMC:
-https://github.com/acidanthera/VirtualSMC
-### WhateverGreen:
-https://github.com/acidanthera/WhateverGreen
+### IntelMausi:
+https://github.com/acidanthera/IntelMausi
+### Lilu:
+https://github.com/acidanthera/Lilu/
 ### OpenCanopy's resources:
 https://github.com/acidanthera/OcBinaryData
 ### OpenCore Legacy Patcher:
 https://github.com/dortania/OpenCore-Legacy-Patcher
+### VirtualSMC:
+https://github.com/acidanthera/VirtualSMC
+### WhateverGreen:
+https://github.com/acidanthera/WhateverGreen
