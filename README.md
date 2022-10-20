@@ -80,7 +80,7 @@ https://github.com/dortania/OpenCore-Legacy-Patcher/actions?query=branch%3Aventu
 
 4. OCLP preparation (already applied, listing to actually teach you something):
 
-1. SET SIP to 0xA03:
+1. SET SIP to 0x308:
 
 `NVRAM -> Add -> 7C436110-AB2A-4BBB-A880-FE41995C9F82 -> csr-active-config` to `03080000`
 
