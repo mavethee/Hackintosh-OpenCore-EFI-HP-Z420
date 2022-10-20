@@ -68,15 +68,13 @@ Side note: Polaris dGPUs DO work at some point, but it's early stage and not rec
 
 2. Lack of AVX2 instruction set requires more fun with macOS 13 installation, so be aware! You need CryptexFixup to even boot!
 
-You can extract ipsw file from Apple Developer site or use link below:
-
-https://www.theiphonewiki.com/wiki/Beta_Firmware/Mac/13.x
+https://github.com/acidanthera/CryptexFixup
 
 I've already applied mentioned patch for 'Root Hash verification' into config.plist but dylds with every update must be done manaully on your end.
 
 3. OCLP now works with Ventura but its still in development and aside beta OS bugs you will gonna have also bugs related to your legacy Metal dGPU:
 
-https://github.com/dortania/OpenCore-Legacy-Patcher/actions?query=branch%3Aventura-alpha
+https://github.com/dortania/OpenCore-Legacy-Patcher/actions/workflows/build-app-wxpython.yml?query=branch%3Amain
 
 4. OCLP preparation (already applied, listing to actually teach you something):
 
@@ -97,7 +95,7 @@ Add `amfi_get_out_of_my_way=1 ipc_control_port_options=0` to `NVRAM -> Add -> 7C
 
 5. (Optional) For auto root patching your unsupported dGPU generate `AutoPkgInstaller.kext` and add it to your `EFI\OC\KEXTS`:
 
-https://github.com/dortania/OpenCore-Legacy-Patcher/blob/ventura-alpha/payloads/Kexts/Acidanthera/AutoPkgInstaller-v1.0.1-DEBUG.zip
+https://github.com/dortania/OpenCore-Legacy-Patcher/blob/main/payloads/Kexts/Acidanthera/AutoPkgInstaller-v1.0.1-DEBUG.zip
 
 6. Follow OCLP prompts and reboot.
 
@@ -118,7 +116,7 @@ Tool doesn't matter really, you just need not valid or unused SMBIOS to copy-pas
 
 ## Credits:
 ### AutoPkgInstaller:
-https://github.com/dortania/OpenCore-Legacy-Patcher/blob/main/payloads/Kexts/Acidanthera/AutoPkgInstaller-v1.0.0-DEBUG.zip
+https://github.com/dortania/OpenCore-Legacy-Patcher/blob/main/payloads/Kexts/Acidanthera/AutoPkgInstaller-v1.0.1-DEBUG.zip
 ### CryptexFixup:
 https://github.com/acidanthera/CryptexFixup
 ### HibernationFixup:
