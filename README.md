@@ -10,7 +10,7 @@ all needed files to install and run macOS on HP Z420!
 https://github.com/acidanthera/OpenCorePkg/releases/tag/0.8.5
 
 <img src="https://media.discordapp.net/attachments/576381585310482443/1017518234729197698/Zrzut_ekranu_2022-09-8_o_21.32.22.png">
-<img src="https://media.discordapp.net/attachments/650062213494603806/1036562795044536421/unknown.png>
+<img src="https://cdn.discordapp.com/attachments/724306793819275309/1036569045065023488/unknown.png">
 
 ## USB issues (need help and contributors):
 
