@@ -383,7 +383,7 @@
                     <key>BundlePath</key>
                     <string>CryptexFixup.kext</string>
                     <key>Comment</key>
-                    <string>V1.0.0 | CryptexFixup.kext</string>
+                    <string>V1.0.1 | CryptexFixup.kext</string>
                     <key>Enabled</key>
                     <true/>
                     <key>ExecutablePath</key>
@@ -391,7 +391,7 @@
                     <key>MaxKernel</key>
                     <string></string>
                     <key>MinKernel</key>
-                    <string></string>
+                    <string>22.0.0</string>
                     <key>PlistPath</key>
                     <string>Contents/Info.plist</string>
                 </dict>
@@ -646,7 +646,7 @@
                 <key>PollAppleHotKeys</key>
                 <false/>
                 <key>ShowPicker</key>
-                <true/>
+                <false/>
                 <key>TakeoffDelay</key>
                 <integer>0</integer>
                 <key>Timeout</key>
@@ -801,13 +801,13 @@
                 <key>AdviseFeatures</key>
                 <true/>
                 <key>MLB</key>
-                <string>F5K1437004NK3F71H</string>
+                <string>F5K1039024NK3F71H</string>
                 <key>MaxBIOSVersion</key>
                 <false/>
                 <key>ProcessorType</key>
                 <integer>0</integer>
                 <key>ROM</key>
-                <data>gbzt7/yD</data>
+                <data>v0Ngz4VK</data>
                 <key>SpoofVendor</key>
                 <true/>
                 <key>SystemMemoryStatus</key>
@@ -815,9 +815,9 @@
                 <key>SystemProductName</key>
                 <string>MacPro7,1</string>
                 <key>SystemSerialNumber</key>
-                <string>F5KGL3ZHP7QM</string>
+                <string>F5KF4GZBP7QM</string>
                 <key>SystemUUID</key>
-                <string>09DA3731-AC7D-42F9-A183-23D7D34005B7</string>
+                <string>374E8A37-53E2-45F9-9745-6726A811B4B5</string>
             </dict>
             <key>UpdateDataHub</key>
             <true/>
