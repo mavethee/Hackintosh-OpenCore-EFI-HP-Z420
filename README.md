@@ -23,6 +23,64 @@ https://github.com/corpnewt/USBMap/blob/master/README.md#quick-start
 For working USB 3.0 I used this PCIe expansion card (native support, no kexts needed), although keep figuring out why BIOS doesn't care about it, appears only on OS level:
 https://www.amazon.pl/Inateck-Karta-USB-porty-ExpresCard/dp/B00HJ1DULE?th=1
 
+## Ventura NOTE - OCLP status and the 'how to'...
+
+Source: https://github.com/dortania/OpenCore-Legacy-Patcher/issues/998
+
+For macOS 13 use OpenCore 0.8.3+, latest is recommended!
+
+1. Natively supported dGPUs require AVX2 support so you are dependent only on Legacy Metal dGPU and OCLP!
+
+https://github.com/dortania/OpenCore-Legacy-Patcher/issues/998#issuecomment-1166340370
+
+Side note: Polaris dGPUs DO work, but require root patching just like Legacy Metal ones, newer than Polaris won't work!
+
+2. Lack of AVX2 instruction set requires more fun with macOS 13 installation, so be aware! You need CryptexFixup to even boot!
+
+https://github.com/acidanthera/CryptexFixup
+
+I've already applied mentioned patch for 'Root Hash verification' into config.plist but dylds with every update must be done manaully on your end.
+
+3. If you are using Metal 1 dGPU, e.g Kepler dGPUs, disable mediaanalysisd which requires Metal 2 feature set!
+
+Add `revblock=pci,media` to `NVRAM -> Add -> 7C436110-AB2A-4BBB-A880-FE41995C9F82 -> boot-args`
+
+Note: if you are specifying certain flags to block, it's no longer default setting so on MacPro7,1 Memory mismatch may reappear, thats why I also specified it.
+
+!Remove on Metal 2 dGPUs!
+
+Source:
+https://github.com/dortania/OpenCore-Legacy-Patcher/pull/1013
+
+4. OCLP now works with Ventura since 0.5.0+!
+
+https://github.com/dortania/OpenCore-Legacy-Patcher/releases/
+
+5. OCLP preparation (already applied, listing to actually teach you something):
+
+- SET SIP to 0x308:
+
+`NVRAM -> Add -> 7C436110-AB2A-4BBB-A880-FE41995C9F82 -> csr-active-config` to `03080000`
+
+- Disable Apple Secure Boot:
+
+`Misc -> Security -> SecureBootModel` to `Disable` 
+
+`Misc -> Security -> DmgLoading` to `Any`
+
+- Disable AMFI (+Fix for Electron apps on 12.3+):
+Add `amfi_get_out_of_my_way=1 ipc_control_port_options=0` to `NVRAM -> Add -> 7C436110-AB2A-4BBB-A880-FE41995C9F82 -> boot-args`
+
+- Reset NVRAM using `ResetNvramEntry.efi` in `EFI\OC\DRIVERS`
+
+- (Optional) For auto root patching your unsupported dGPU generate `AutoPkgInstaller.kext` and add it to your `EFI\OC\KEXTS`:
+
+https://github.com/dortania/OpenCore-Legacy-Patcher/blob/main/payloads/Kexts/Acidanthera/AutoPkgInstaller-v1.0.1-DEBUG.zip
+
+- Follow OCLP prompts and reboot.
+
+Done! GPU acceleration in Ventura is working!
+
 ## Monterey NOTE:
 
 Current config is prepared for booting Ventura so if you want to run Monterey with supported dGPU, **revert Ventura NOTE steps.**
@@ -53,53 +111,6 @@ Downside is need to every time gather InstallerAssistants.pkg from e.g. MrMacint
 https://mrmacintosh.com/macos-12-monterey-full-installer-database-download-directly-from-apple/
 
 (Thats if you choose to stay with MacPro7,1!)
-
-## Ventura NOTE - OCLP status and the 'how to'...
-
-Source: https://github.com/dortania/OpenCore-Legacy-Patcher/issues/998
-
-For macOS 13 B3+ use OpenCore 0.8.3+
-
-1. Natively supported dGPUs require AVX2 support so you are dependent only on Legacy Metal dGPU and OCLP!
-
-https://github.com/dortania/OpenCore-Legacy-Patcher/issues/998#issuecomment-1166340370
-
-Side note: Polaris dGPUs DO work, but require root patching just like Legacy Metal ones, newer than Polaris won't work!
-
-2. Lack of AVX2 instruction set requires more fun with macOS 13 installation, so be aware! You need CryptexFixup to even boot!
-
-https://github.com/acidanthera/CryptexFixup
-
-I've already applied mentioned patch for 'Root Hash verification' into config.plist but dylds with every update must be done manaully on your end.
-
-3. OCLP now works with Ventura since 0.5.0+!
-
-https://github.com/dortania/OpenCore-Legacy-Patcher/releases/
-
-4. OCLP preparation (already applied, listing to actually teach you something):
-
-- SET SIP to 0x308:
-
-`NVRAM -> Add -> 7C436110-AB2A-4BBB-A880-FE41995C9F82 -> csr-active-config` to `03080000`
-
-- Disable Apple Secure Boot:
-
-`Misc -> Security -> SecureBootModel` to `Disable` 
-
-`Misc -> Security -> DmgLoading` to `Any`
-
-- Disable AMFI (+Fix for Electron apps on 12.3+):
-Add `amfi_get_out_of_my_way=1 ipc_control_port_options=0` to `NVRAM -> Add -> 7C436110-AB2A-4BBB-A880-FE41995C9F82 -> boot-args`
-
-- Reset NVRAM using `ResetNvramEntry.efi` in `EFI\OC\DRIVERS`
-
-- (Optional) For auto root patching your unsupported dGPU generate `AutoPkgInstaller.kext` and add it to your `EFI\OC\KEXTS`:
-
-https://github.com/dortania/OpenCore-Legacy-Patcher/blob/main/payloads/Kexts/Acidanthera/AutoPkgInstaller-v1.0.1-DEBUG.zip
-
-- Follow OCLP prompts and reboot.
-
-Done! GPU acceleration in Ventura is working!
 
 ### SMBIOS:
 Present in repo SMBIOS is not purchased Apple's device but for own sake, I don't advice you to use it.

@@ -275,7 +275,7 @@
                     <key>BundlePath</key>
                     <string>RestrictEvents.kext</string>
                     <key>Comment</key>
-                    <string>V1.0.8 | RestrictEvents.kext</string>
+                    <string>V1.0.9 | RestrictEvents.kext</string>
                     <key>Enabled</key>
                     <true/>
                     <key>ExecutablePath</key>
@@ -391,7 +391,7 @@
                     <key>MaxKernel</key>
                     <string></string>
                     <key>MinKernel</key>
-                    <string>22.0.0</string>
+                    <string></string>
                     <key>PlistPath</key>
                     <string>Contents/Info.plist</string>
                 </dict>
@@ -760,7 +760,7 @@
                     <key>SystemAudioVolume</key>
                     <data>Rg==</data>
                     <key>boot-args</key>
-                    <string>-v keepsyms=1 debug=0x100 npci=0x2000 amfi=0x80 ipc_control_port_options=0 revpatch=sbvmm,pci,memory alcid=66</string>
+                    <string>-v keepsyms=1 debug=0x100 npci=0x2000 amfi=0x80 ipc_control_port_options=0 revpatch=sbvmm,pci,memory revblock=pcie, media alcid=66</string>
                     <key>csr-active-config</key>
                     <data>AwgAAA==</data>
                     <key>run-efi-updater</key>
