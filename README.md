@@ -3,11 +3,11 @@
 ## Hackintosh-OpenCore-HP-Z420
 EFI premade of OpenCore bootloader for HP-Z420 is here and it runs Ventura!
 
-## Current version - OpenCore 0.8.5 DEBUG
+## Current version - OpenCore 0.8.6 DEBUG
 Repository contains full ,,Plug-and-Play" EFI of OpenCore bootloader and
 all needed files to install and run macOS on HP Z420!
 
-https://github.com/acidanthera/OpenCorePkg/releases/tag/0.8.5
+https://github.com/acidanthera/OpenCorePkg/releases/tag/0.8.6
 
 <img src="https://media.discordapp.net/attachments/576381585310482443/1017518234729197698/Zrzut_ekranu_2022-09-8_o_21.32.22.png">
 <img src="https://cdn.discordapp.com/attachments/724306793819275309/1036569045065023488/unknown.png">
@@ -69,7 +69,7 @@ https://github.com/dortania/OpenCore-Legacy-Patcher/releases/
 `Misc -> Security -> DmgLoading` to `Any`
 
 - Disable AMFI (+Fix for Electron apps on 12.3+):
-Add `amfi_get_out_of_my_way=1 ipc_control_port_options=0` to `NVRAM -> Add -> 7C436110-AB2A-4BBB-A880-FE41995C9F82 -> boot-args`
+Add `amfi=0x80 ipc_control_port_options=0` to `NVRAM -> Add -> 7C436110-AB2A-4BBB-A880-FE41995C9F82 -> boot-args`
 
 - Reset NVRAM using `ResetNvramEntry.efi` in `EFI\OC\DRIVERS`
 
