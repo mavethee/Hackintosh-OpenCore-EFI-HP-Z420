@@ -10,11 +10,13 @@ all needed files to install and run macOS on HP Z420!
 https://github.com/acidanthera/OpenCorePkg/releases/tag/0.8.6
 
 <img src="https://media.discordapp.net/attachments/576381585310482443/1017518234729197698/Zrzut_ekranu_2022-09-8_o_21.32.22.png">
-<img src="https://cdn.discordapp.com/attachments/724306793819275309/1036569045065023488/unknown.png">
+<img src="https://media.discordapp.net/attachments/724306793819275309/1039964508128555079/HPZ420.png">
 
 ## USB issues (need help and contributors):
 
-Internal USB 3.0 doesnt work although USB 2.0 ones should work, I have no idea why but since switched to MacPro7,1, USB mapping actually does something so uploading USB map kexts in case it does something with your machine! ^^ 
+Internal USB 3.0 doesnt work although USB 2.0 ones should work, USB mapping actually does something so uploading USB map kexts in case it does something with your machine! ^^
+
+It's good old trash can again! If you have issues installing Ventura, switch to MacPro7,1 then switch back after macOS is installed! :D
 
 But generally check this README anyways:
 https://github.com/corpnewt/USBMap/blob/master/README.md#quick-start
@@ -43,9 +45,7 @@ I've already applied mentioned patch for 'Root Hash verification' into config.pl
 
 3. If you are using Metal 1 dGPU, e.g Kepler dGPUs, disable mediaanalysisd which requires Metal 2 feature set!
 
-Add `revblock=pci,media` to `NVRAM -> Add -> 7C436110-AB2A-4BBB-A880-FE41995C9F82 -> boot-args`
-
-Note: if you are specifying certain flags to block, it's no longer default setting so on MacPro7,1 Memory mismatch may reappear, thats why I also specified it.
+Add `revblock=media` to `NVRAM -> Add -> 7C436110-AB2A-4BBB-A880-FE41995C9F82 -> boot-args`
 
 !Remove on Metal 2 dGPUs!
 
@@ -107,11 +107,6 @@ https://github.com/dortania/OpenCore-Legacy-Patcher/blob/main/payloads/Kexts/Aci
 
 Done! GPU acceleration in Monterey is back again! 
 
-Downside is need to every time gather InstallerAssistants.pkg from e.g. MrMacintosh's blog:
-https://mrmacintosh.com/macos-12-monterey-full-installer-database-download-directly-from-apple/
-
-(Thats if you choose to stay with MacPro7,1!)
-
 ### SMBIOS:
 Present in repo SMBIOS is not purchased Apple's device but for own sake, I don't advice you to use it.
 ...for own sake ;)
@@ -130,16 +125,23 @@ Tool doesn't matter really, you just need not valid or unused SMBIOS to copy-pas
 https://github.com/dortania/OpenCore-Legacy-Patcher/blob/main/payloads/Kexts/Acidanthera/AutoPkgInstaller-v1.0.1-DEBUG.zip
 ### CryptexFixup:
 https://github.com/acidanthera/CryptexFixup
+### FeatureUnlock:
+https://github.com/acidanthera/FeatureUnlock
 ### HibernationFixup:
 https://github.com/acidanthera/HibernationFixup
 ### IntelMausi:
 https://github.com/acidanthera/IntelMausi
 ### Lilu:
 https://github.com/acidanthera/Lilu/
+### OpenCorePkg:
+https://github.com/acidanthera/OpenCorePkg
 ### OpenCanopy's resources:
 https://github.com/acidanthera/OcBinaryData
 ### OpenCore Legacy Patcher:
 https://github.com/dortania/OpenCore-Legacy-Patcher
+
+### RestrictEvents:
+https://github.com/acidanthera/RestrictEvents
 ### VirtualSMC:
 https://github.com/acidanthera/VirtualSMC
 ### WhateverGreen:
