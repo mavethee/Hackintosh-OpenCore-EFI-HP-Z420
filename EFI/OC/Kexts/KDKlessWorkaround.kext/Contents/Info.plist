@@ -3,53 +3,76 @@
 <plist version="1.0">
 <dict>
 	<key>BuildMachineOSBuild</key>
-	<string>21G320</string>
+	<string>20G1020</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleExecutable</key>
-	<string>FeatureUnlock</string>
+	<string>KDKlessWorkaround</string>
 	<key>CFBundleIdentifier</key>
-	<string>com.khronokernel.FeatureUnlock</string>
+	<string>com.flagers.KDKlessWorkaround</string>
 	<key>CFBundleInfoDictionaryVersion</key>
 	<string>6.0</string>
 	<key>CFBundleName</key>
-	<string>FeatureUnlock</string>
+	<string>KDKlessWorkaround</string>
 	<key>CFBundlePackageType</key>
 	<string>KEXT</string>
 	<key>CFBundleShortVersionString</key>
-	<string>1.1.2</string>
+	<string>1.0.0</string>
 	<key>CFBundleSupportedPlatforms</key>
 	<array>
 		<string>MacOSX</string>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>1.1.2</string>
+	<string>1.0.0</string>
 	<key>DTCompiler</key>
 	<string>com.apple.compilers.llvm.clang.1_0</string>
 	<key>DTPlatformBuild</key>
-	<string>13F100</string>
+	<string>13C100</string>
 	<key>DTPlatformName</key>
 	<string>macosx</string>
 	<key>DTPlatformVersion</key>
-	<string>12.3</string>
+	<string>12.1</string>
 	<key>DTSDKBuild</key>
-	<string>21E226</string>
+	<string>21C46</string>
 	<key>DTSDKName</key>
-	<string>macosx12.3</string>
+	<string>macosx12.1</string>
 	<key>DTXcode</key>
-	<string>1341</string>
+	<string>1321</string>
 	<key>DTXcodeBuild</key>
-	<string>13F100</string>
+	<string>13C100</string>
 	<key>IOKitPersonalities</key>
 	<dict>
-		<key>FeatureUnlock</key>
+		<key>KDKlessWorkaround</key>
 		<dict>
+			<key>AMDClassToPluginMap</key>
+			<dict>
+				<key>AMDRadeonX4000_AMDBaffinGraphicsAccelerator</key>
+				<string>AMDMTLBronzeDriver</string>
+				<key>AMDRadeonX4000_AMDEllesmereGraphicsAccelerator</key>
+				<string>AMDMTLBronzeDriver</string>
+				<key>AMDRadeonX5000_AMDVega10GraphicsAccelerator</key>
+				<string>AMDRadeonX5000MTLDriver</string>
+				<key>AMDRadeonX5000_AMDVega12GraphicsAccelerator</key>
+				<string>AMDRadeonX5000MTLDriver</string>
+				<key>AMDRadeonX5000_AMDVega20GraphicsAccelerator</key>
+				<string>AMDRadeonX5000MTLDriver</string>
+				<key>AMDRadeonX6000_AMDNavi10GraphicsAccelerator</key>
+				<string>AMDRadeonX6000MTLDriver</string>
+				<key>AMDRadeonX6000_AMDNavi12GraphicsAccelerator</key>
+				<string>AMDRadeonX6000MTLDriver</string>
+				<key>AMDRadeonX6000_AMDNavi14GraphicsAccelerator</key>
+				<string>AMDRadeonX6000MTLDriver</string>
+				<key>AMDRadeonX6000_AMDNavi21GraphicsAccelerator</key>
+				<string>AMDRadeonX6000MTLDriver</string>
+				<key>AMDRadeonX6000_AMDNavi23GraphicsAccelerator</key>
+				<string>AMDRadeonX6000MTLDriver</string>
+			</dict>
 			<key>CFBundleIdentifier</key>
-			<string>com.khronokernel.FeatureUnlock</string>
+			<string>com.flagers.KDKlessWorkaround</string>
 			<key>IOClass</key>
-			<string>FeatureUnlock</string>
+			<string>KDKlessWorkaround</string>
 			<key>IOMatchCategory</key>
-			<string>FeatureUnlock</string>
+			<string>KDKlessWorkaround</string>
 			<key>IOProviderClass</key>
 			<string>IOResources</string>
 			<key>IOResourceMatch</key>
@@ -59,7 +82,7 @@
 	<key>LSMinimumSystemVersion</key>
 	<string>10.14</string>
 	<key>NSHumanReadableCopyright</key>
-	<string>Copyright © 2021 Khronokernel. All rights reserved.</string>
+	<string>Copyright © 2021-2022 flagers. All rights reserved.</string>
 	<key>OSBundleLibraries</key>
 	<dict>
 		<key>as.vit9696.Lilu</key>

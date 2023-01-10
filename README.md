@@ -3,13 +3,12 @@
 ## Hackintosh-OpenCore-HP-Z420
 EFI premade of OpenCore bootloader for HP-Z420 is here and it runs Ventura!
 
-## Current version - OpenCore 0.8.7 DEBUG
+## Current version - OpenCore 0.8.8 DEBUG
 Repository contains full ,,Plug-and-Play" EFI of OpenCore bootloader and
 all needed files to install and run macOS on HP Z420!
 
-https://github.com/acidanthera/OpenCorePkg/releases/tag/0.8.7
+https://github.com/acidanthera/OpenCorePkg/releases/tag/0.8.8
 
-<img src="https://media.discordapp.net/attachments/576381585310482443/1017518234729197698/Zrzut_ekranu_2022-09-8_o_21.32.22.png">
 <img src="https://media.discordapp.net/attachments/724306793819275309/1039964508128555079/HPZ420.png">
 
 ### SMBIOS:
@@ -56,23 +55,27 @@ https://www.amazon.pl/Inateck-Karta-USB-porty-ExpresCard/dp/B00HJ1DULE?th=1
 
 Sources:
 
-* https://github.com/dortania/OpenCore-Legacy-Patcher/issues/998
+* https://github.com/dortania/OpenCore-Legacy-Patcher/issues/998 
+
+* https://github.com/dortania/OpenCore-Legacy-Patcher/issues/1008
 
 * https://github.com/dortania/OpenCore-Legacy-Patcher/pull/1013
 
+* https://github.com/dortania/OpenCore-Legacy-Patcher/issues/1019
+
 For macOS 13 use OpenCore 0.8.3+, latest is recommended.
+
+!Avoid installing 13.2! RSR updates DO NOT WORK due Rosetta Cryptex!
 
 1. Natively supported dGPUs require AVX2 support so you are dependent only on Legacy Metal dGPU and OCLP!
 
 -   https://github.com/dortania/OpenCore-Legacy-Patcher/issues/998#issuecomment-1166340370
 
-    **Side note:** Polaris dGPUs DO work, but require root patching just like Legacy Metal ones, newer than Polaris won't work!
+    **Side note:** Polaris and Vega dGPUs DO work, but require root patching just like Legacy Metal ones, newer than Polaris or Vega won't work!
 
 2. Lack of AVX2 instruction set requires more fun with macOS 13 installation, so be aware! You need CryptexFixup to even boot!
 
 -   https://github.com/acidanthera/CryptexFixup
-
-I've already applied mentioned patch for 'Root Hash verification' into config.plist but dylds with every update must be done manaully on your end.
 
 3. If you are using Metal 1 dGPU, e.g Kepler dGPUs, disable mediaanalysisd which requires Metal 2 feature set!
 
@@ -80,7 +83,7 @@ I've already applied mentioned patch for 'Root Hash verification' into config.pl
 
     !Remove on Metal 2 dGPUs!
 
-4. OCLP now works with Ventura since 0.5.0+!
+4. OCLP now works with Ventura since 0.5.0+! (for Vega dGPUs since 0.5.4!)
 
     https://github.com/dortania/OpenCore-Legacy-Patcher/releases/
 
@@ -150,6 +153,8 @@ https://github.com/acidanthera/FeatureUnlock
 https://github.com/acidanthera/HibernationFixup
 ### IntelMausi:
 https://github.com/acidanthera/IntelMausi
+### KDKLessWorkaround
+https://github.com/dortania/OpenCore-Legacy-Patcher/blob/main/payloads/Kexts/Misc/KDKlessWorkaround-v1.0.0-DEBUG.zip
 ### Lilu:
 https://github.com/acidanthera/Lilu/
 ### OpenCorePkg:
