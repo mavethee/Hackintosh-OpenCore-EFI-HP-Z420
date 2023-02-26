@@ -3,11 +3,11 @@
 ## Hackintosh-OpenCore-HP-Z420
 EFI premade of OpenCore bootloader for HP-Z420 is here and it runs Ventura!
 
-## Current version - OpenCore 0.8.8 DEBUG
+## Current version - OpenCore 0.8.9 DEBUG
 Repository contains full ,,Plug-and-Play" EFI of OpenCore bootloader and
 all needed files to install and run macOS on HP Z420!
 
-https://github.com/acidanthera/OpenCorePkg/releases/tag/0.8.8
+https://github.com/acidanthera/OpenCorePkg/releases/tag/0.8.9
 
 <img src="https://media.discordapp.net/attachments/321319496990326784/1065988767749505104/Zrzut_ekranu_2023-01-20_o_14.38.02.png">
 
@@ -17,13 +17,13 @@ For macOS 13 use OpenCore 0.8.3+, latest is recommended.
 
 !Avoid installing 13.2! RSR updates DO NOT WORK due Rosetta Cryptex!
 
-To install Ventura, you need MacPro7,1 SMBIOS, replace `EFI/OC/Kexts/USBMap.kext` and `/EFI/OC/config.plist` for the ones in `Install` folder (if still won't detect your USBs properly, see USB section on bottom of the README).
+To install Ventura, you need MacPro7,1 SMBIOS, use EFI from `MP7,1_InstallEFI` folder (if still won't detect your USBs properly, see USB section on bottom of the README).
 
 Present in repo SMBIOS is not purchased Apple's device but for own sake, I don't advice you to use it. ...for own sake ;)
 
 Use GenSMBIOS: https://github.com/corpnewt/GenSMBIOS for that to regenerate MacPro7,1
 
-Post-Install, replace `EFI/OC/Kexts/USBMap.kext` and `/EFI/OC/config.plist` back to the one's from repo's EFI folder.
+Post-Install, you can optionally use EFI from repo's main EFI folder with MacPro6,1, pure astetics related to more matching hardware ;)
 
 Regenerate MacPro6,1 SMBIOS for working iServices on Trash can! :D
 
@@ -59,17 +59,13 @@ Regenerate MacPro6,1 SMBIOS for working iServices on Trash can! :D
 
 -   SET SIP to 0x308:
 
-        `NVRAM -> Add -> 7C436110-AB2A-4BBB-A880-FE41995C9F82 -> csr-active-config` to `03080000`
+`NVRAM -> Add -> 7C436110-AB2A-4BBB-A880-FE41995C9F82 -> csr-active-config` to `03080000`
 
--   Disable Apple Secure Boot:
+-   Disable Apple Secure Boot: `Misc -> Security -> SecureBootModel` to `Disable` 
 
-        `Misc -> Security -> SecureBootModel` to `Disable` 
+-   Disable Signed DMGs loading: `Misc -> Security -> DmgLoading` to `Any`
 
-        `Misc -> Security -> DmgLoading` to `Any`
-
--   Disable AMFI (+Fix for Electron apps on 12.3+):
-        
-        Add `amfi=0x80 ipc_control_port_options=0` to `NVRAM -> Add -> 7C436110-AB2A-4BBB-A880-FE41995C9F82 -> boot-args`
+-   Disable AMFI (+Fix for Electron apps on 12.3+):  `amfi=0x80 ipc_control_port_options=0` to `NVRAM -> Add -> 7C436110-AB2A-4BBB-A880-FE41995C9F82 -> boot-args`
 
 -   Reset NVRAM using `ResetNvramEntry.efi` in `EFI\OC\DRIVERS`
 
@@ -132,15 +128,11 @@ For unsupported dGPU, follow the steps below:
 
         `EFI/OC/Kexts/KDKLessWorkaround.kext`
 
--   SET SIP to 0x802:
+-   SET SIP to 0x802: `NVRAM -> Add -> 7C436110-AB2A-4BBB-A880-FE41995C9F82 -> csr-active-config` to `02080000`
 
-        `NVRAM -> Add -> 7C436110-AB2A-4BBB-A880-FE41995C9F82 -> csr-active-config` to `02080000`
+-   Disable Apple Secure Boot: `Misc -> Security -> SecureBootModel` to `Disable` 
 
--   Disable Apple Secure Boot:
-
-        `Misc -> Security -> SecureBootModel` to `Disable` 
-    
-        `Misc -> Security -> DmgLoading` to `Any`
+-   Disable Signed DMGs loading: `Misc -> Security -> DmgLoading` to `Any`
 
 -   Reset NVRAM using `ResetNvramEntry.efi` in `EFI\OC\DRIVERS`
 
@@ -156,7 +148,7 @@ For unsupported dGPU, follow the steps below:
 
 ## Credits:
 ### AutoPkgInstaller:
-https://github.com/dortania/OpenCore-Legacy-Patcher/blob/main/payloads/Kexts/Acidanthera/AutoPkgInstaller-v1.0.1-DEBUG.zip
+https://github.com/dortania/OpenCore-Legacy-Patcher/blob/main/payloads/Kexts/Acidanthera/AutoPkgInstaller-v1.0.2-DEBUG.zip
 ### CryptexFixup:
 https://github.com/acidanthera/CryptexFixup
 ### FeatureUnlock:
