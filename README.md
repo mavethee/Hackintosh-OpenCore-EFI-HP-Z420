@@ -3,11 +3,11 @@
 ## Hackintosh-OpenCore-HP-Z420
 EFI premade of OpenCore bootloader for HP-Z420 is here and it runs Ventura!
 
-## Current version - OpenCore 0.8.9 DEBUG
+## Current version - OpenCore 0.9.1 DEBUG
 Repository contains full ,,Plug-and-Play" EFI of OpenCore bootloader and
 all needed files to install and run macOS on HP Z420!
 
-https://github.com/acidanthera/OpenCorePkg/releases/tag/0.8.9
+https://github.com/acidanthera/OpenCorePkg/releases/tag/0.9.1
 
 <img src="https://media.discordapp.net/attachments/321319496990326784/1065988767749505104/Zrzut_ekranu_2023-01-20_o_14.38.02.png">
 
@@ -15,7 +15,7 @@ https://github.com/acidanthera/OpenCorePkg/releases/tag/0.8.9
 
 For macOS 13 use OpenCore 0.8.3+, latest is recommended.
 
-!Avoid installing 13.2! RSR updates DO NOT WORK due Rosetta Cryptex!
+!Avoid installing RSR updates! RSR updates DO NOT WORK due Rosetta Cryptex!
 
 To install Ventura, you need MacPro7,1 SMBIOS, use EFI from `MP7,1_InstallEFI` folder (if still won't detect your USBs properly, see USB section on bottom of the README).
 
@@ -45,21 +45,23 @@ Regenerate MacPro6,1 SMBIOS for working iServices on Trash can! :D
 
     !Remove on Metal 2 dGPUs!
 
-4. OCLP now works with Ventura since 0.5.0+! (for Vega dGPUs required is 0.6.0, but again latest is highly reccomended!)
+4. For non-AVX2 CPUs, you need to disable f16c sysctl reporting to resolve CoreGraphics.framework crashing in macOS 13.3+:
+
+-   Add `revpatch=16c` to `NVRAM -> Add -> 7C436110-AB2A-4BBB-A880-FE41995C9F82 -> boot-args`
+
+5. OCLP now works with Ventura since 0.5.0+! (for Vega dGPUs required is 0.6.0, but again latest is highly reccomended!)
 
 -   https://github.com/dortania/OpenCore-Legacy-Patcher/releases/
 
 -   https://github.com/dortania/OpenCore-Legacy-Patcher/actions/workflows/build-app-wxpython.yml (for Vega dGPUs as 0.6.0 is not out yet!)
 
-5. While Legacy Metal dGPUs work for most part, there are still some issues you might want to track:
+6. While Legacy Metal dGPUs work for most part, there are still some issues you might want to track:
 
     https://github.com/dortania/OpenCore-Legacy-Patcher/issues/1008#issue-1400530902
 
-6. OCLP preparation (already applied, listing to actually teach you something):
+7. OCLP preparation (already applied, listing to actually teach you something):
 
--   SET SIP to 0x308:
-
-`NVRAM -> Add -> 7C436110-AB2A-4BBB-A880-FE41995C9F82 -> csr-active-config` to `03080000`
+-   SET SIP to 0x308: `NVRAM -> Add -> 7C436110-AB2A-4BBB-A880-FE41995C9F82 -> csr-active-config` to `03080000`
 
 -   Disable Apple Secure Boot: `Misc -> Security -> SecureBootModel` to `Disable` 
 
@@ -71,7 +73,7 @@ Regenerate MacPro6,1 SMBIOS for working iServices on Trash can! :D
 
 -   (Optional) For auto root patching your unsupported dGPU generate `AutoPkgInstaller.kext` and add it to your `EFI\OC\KEXTS`:
 
-        https://github.com/dortania/OpenCore-Legacy-Patcher/blob/main/payloads/Kexts/Acidanthera/AutoPkgInstaller-v1.0.1-DEBUG.zip
+    https://github.com/dortania/OpenCore-Legacy-Patcher/blob/main/payloads/Kexts/Acidanthera/AutoPkgInstaller-v1.0.2-DEBUG.zip
 
 -   Flash your config.plist, reboot macOS and launch OCLP,
 
@@ -88,6 +90,8 @@ Sources:
 * https://github.com/dortania/OpenCore-Legacy-Patcher/pull/1013
 
 * https://github.com/dortania/OpenCore-Legacy-Patcher/issues/1019
+
+* https://github.com/dortania/OpenCore-Legacy-Patcher/commit/c0825ed24e98688ff430c30324f11b5c41840b8a
 
 # What works:
 * Ethernet,

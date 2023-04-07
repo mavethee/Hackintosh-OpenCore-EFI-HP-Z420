@@ -798,7 +798,7 @@
 				<key>SystemAudioVolume</key>
 				<data>Rg==</data>
 				<key>boot-args</key>
-				<string>-v keepsyms=1 debug=0x100 npci=0x2000 amfi=0x80 ipc_control_port_options=0 revpatch=sbvmm,pci,memory revblock=pci,media alcid=66</string>
+				<string>-v keepsyms=1 debug=0x100 npci=0x2000 amfi=0x80 ipc_control_port_options=0 revpatch=sbvmm,pci,memory,f16c revblock=pci,media alcid=66</string>
 				<key>csr-active-config</key>
 				<data>AwgAAA==</data>
 				<key>run-efi-updater</key>
@@ -1080,6 +1080,8 @@
 			<key>DirectGopRendering</key>
 			<false/>
 			<key>ForceResolution</key>
+			<false/>
+			<key>GopBurstMode</key>
 			<false/>
 			<key>GopPassThrough</key>
 			<string>Disabled</string>
