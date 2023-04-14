@@ -11,29 +11,50 @@ https://github.com/acidanthera/OpenCorePkg/releases/tag/0.9.1
 
 <img src="https://media.discordapp.net/attachments/321319496990326784/1065988767749505104/Zrzut_ekranu_2023-01-20_o_14.38.02.png">
 
-# Ventura NOTE:
+# What works:
+* Ethernet,
+* Audio,
+* USB (except internal USB3 ports),
+* iServices (iMessage, FaceTime, AppStore, iCloud, etc.).
 
-For macOS 13 use OpenCore 0.8.3+, latest is recommended.
+# What doesn't work:
+* Internal USB3 ports,
+* Sleep (Clicking sounds on wake-up attempt),
+* Fan Monitoring (needs to be manually mapped in config.plist, I didn't figure it out yet)
 
-!Avoid installing RSR updates! RSR updates DO NOT WORK due Rosetta Cryptex!
+# Installation:
 
-To install Ventura, you need MacPro7,1 SMBIOS, use EFI from `MP7,1_InstallEFI` folder (if still won't detect your USBs properly, see USB section on bottom of the README).
+Internal USB 3.0 doesnt work although USB 2.0 ones should work, USB mapping actually does something so uploading USB map kexts in case it does something with your machine! ^^
 
-Present in repo SMBIOS is not purchased Apple's device but for own sake, I don't advice you to use it. ...for own sake ;)
+https://github.com/corpnewt/USBMap/blob/master/README.md#quick-start
 
-Use GenSMBIOS: https://github.com/corpnewt/GenSMBIOS for that to regenerate MacPro7,1
+For working USB 3.0 I used this PCIe expansion card (native support, no kexts needed), although keep figuring out why BIOS doesn't care about it, appears only on OS level:
+
+https://www.amazon.pl/Inateck-Karta-USB-porty-ExpresCard/dp/B00HJ1DULE?th=1
+
+(for Monterey, just skip part below and scroll down to Monterey notes if you have Metal dGPU dropped in Monterey e.g Kepler)
+
+To sucessfully perform macOS Ventura installation, you need MacPro7,1 SMBIOS! 
+
+-   Use EFI from `MP7,1_InstallEFI` folder (if still won't detect your USBs properly, see USB section on bottom of the README).
+
+    Present in repo SMBIOS is probably invalid/not purchased Apple's device but for own sake, I don't advice you to use it.
+
+    Use GenSMBIOS: https://github.com/corpnewt/GenSMBIOS for that to regenerate MacPro7,1
 
 Post-Install, you can optionally use EFI from repo's main EFI folder with MacPro6,1, pure astetics related to more matching hardware ;)
 
-Regenerate MacPro6,1 SMBIOS for working iServices on Trash can! :D
+(As you may see on picture above, that's just my workaround over Apple's blacklist I guess, feel free to suggest how to do it without double EFIs),
 
-## What has been done and must be done to make it boot?
+# What has been done and must be done to make it boot?
+
+0. For macOS 13 use OpenCore 0.8.3+, latest is recommended. !Avoid installing RSR updates! RSR updates DO NOT WORK due Rosetta Cryptex!
 
 1. Natively supported dGPUs require AVX2 support so you are dependent only on Legacy Metal dGPU and OCLP!
 
 -   https://github.com/dortania/OpenCore-Legacy-Patcher/issues/998#issuecomment-1166340370
 
-    **Side note:** Polaris and Vega dGPUs DO work, but require root patching just like Legacy Metal ones, newer than Polaris or Vega won't work!
+    **Side note:** Polaris and Vega dGPUs DO work, but require root patching just like Legacy Metal ones, Navi won't work!
 
 2. Lack of AVX2 instruction set requires more fun with macOS 13 installation, so be aware! You need CryptexFixup to even boot!
 
@@ -49,11 +70,9 @@ Regenerate MacPro6,1 SMBIOS for working iServices on Trash can! :D
 
 -   Add `revpatch=16c` to `NVRAM -> Add -> 7C436110-AB2A-4BBB-A880-FE41995C9F82 -> boot-args`
 
-5. OCLP now works with Ventura since 0.5.0+! (for Vega dGPUs required is 0.6.0, but again latest is highly reccomended!)
+5. OCLP now works with Ventura since 0.5.0+! (for 13.3+, use at least 0.6.3 to fully address mentioned issues above!)
 
 -   https://github.com/dortania/OpenCore-Legacy-Patcher/releases/
-
--   https://github.com/dortania/OpenCore-Legacy-Patcher/actions/workflows/build-app-wxpython.yml (for Vega dGPUs as 0.6.0 is not out yet!)
 
 6. While Legacy Metal dGPUs work for most part, there are still some issues you might want to track:
 
@@ -77,9 +96,7 @@ Regenerate MacPro6,1 SMBIOS for working iServices on Trash can! :D
 
 -   Flash your config.plist, reboot macOS and launch OCLP,
 
-7. Follow OCLP prompts and reboot.
-
-**Done! GPU acceleration in Ventura is working!**
+8. Follow OCLP prompts and reboot. **Done! GPU acceleration in Ventura is working!**
 
 Sources:
 
@@ -93,62 +110,41 @@ Sources:
 
 * https://github.com/dortania/OpenCore-Legacy-Patcher/commit/c0825ed24e98688ff430c30324f11b5c41840b8a
 
-# What works:
-* Ethernet,
-* Audio,
-* USB (except internal USB3 ports),
-* iServices (iMessage, FaceTime, AppStore, iCloud, etc.).
-
-# What doesn't work:
-* Internal USB3 ports,
-* Sleep (Clicking sounds on wake-up attempt),
-* Fan Monitoring (needs to be manually mapped in config.plist, I didn't figure it out yet)
-
-
-# USB issues (need help and contributors):
-
-Internal USB 3.0 doesnt work although USB 2.0 ones should work, USB mapping actually does something so uploading USB map kexts in case it does something with your machine! ^^
-
-It's good old trash can again! If you have issues installing Ventura, switch to MacPro7,1 then switch back after macOS is installed! :D
-
-But generally check this README anyways:
-
-https://github.com/corpnewt/USBMap/blob/master/README.md#quick-start
-
-
-For working USB 3.0 I used this PCIe expansion card (native support, no kexts needed), although keep figuring out why BIOS doesn't care about it, appears only on OS level:
-
-https://www.amazon.pl/Inateck-Karta-USB-porty-ExpresCard/dp/B00HJ1DULE?th=1
+* https://dortania.github.io/OpenCore-Legacy-Patcher/VENTURA-DROP.html#currently-unsupported-broken-hardware-in-ventura
 
 # Monterey NOTE:
 
-Current config is prepared for booting Ventura so if you want to run Monterey with supported dGPU, **revert Ventura NOTE steps.**
+Current config is prepared for booting Ventura so if you want to run Monterey, **revert Ventura NOTE steps.**
 
-For unsupported dGPU, follow the steps below:
+0.   Remove Ventura related kexts:
 
--   Remove Ventura related kexts:
+    `EFI/OC/Kexts/CryptexFixup.kext`
 
-        `EFI/OC/Kexts/CryptexFixup.kext`
+    `EFI/OC/Kexts/KDKLessWorkaround.kext`
 
-        `EFI/OC/Kexts/KDKLessWorkaround.kext`
+## For unsupported dGPU, follow the steps below (for natively supported dGPUs, please refer to default settings in Dortania's Guide):
 
--   SET SIP to 0x802: `NVRAM -> Add -> 7C436110-AB2A-4BBB-A880-FE41995C9F82 -> csr-active-config` to `02080000`
+1.   SET SIP to 0x802: 
 
--   Disable Apple Secure Boot: `Misc -> Security -> SecureBootModel` to `Disable` 
+    `NVRAM -> Add -> 7C436110-AB2A-4BBB-A880-FE41995C9F82 -> csr-active-config -> 02080000`
 
--   Disable Signed DMGs loading: `Misc -> Security -> DmgLoading` to `Any`
+2.   Disable Apple Secure Boot:
 
--   Reset NVRAM using `ResetNvramEntry.efi` in `EFI\OC\DRIVERS`
+    `Misc -> Security -> SecureBootModel -> Disable` 
 
--   (Optional) For auto root patching your unsupported dGPU - add `AutoPkgInstaller.kext` to your `EFI\OC\KEXTS`:
+3.   Disable Signed DMGs loading:
+
+    `Misc -> Security -> DmgLoading -> Any`
+
+4.   Reset NVRAM using `ResetNvramEntry.efi` in `EFI\OC\DRIVERS`
+
+5.   (Optional) For auto root patching your unsupported dGPU - add `AutoPkgInstaller.kext` to your `EFI\OC\KEXTS`:
 
         https://github.com/dortania/OpenCore-Legacy-Patcher/blob/main/payloads/Kexts/Acidanthera/AutoPkgInstaller-v1.0.1-DEBUG.zip
 
-- Flash your config.plist, reboot macOS and launch OCLP,
+6. Flash your config.plist, reboot macOS and launch OCLP,
 
-- Follow OCLP prompts and reboot.
-
-**Done! GPU acceleration in Monterey is back again!**
+7. Follow OCLP prompts and reboot. **Done! GPU acceleration in Monterey is back again!**
 
 ## Credits:
 ### AutoPkgInstaller:
