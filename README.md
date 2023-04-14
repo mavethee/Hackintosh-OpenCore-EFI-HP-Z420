@@ -66,11 +66,11 @@ Post-Install, you can optionally use EFI from repo's main EFI folder with MacPro
 
     !Remove on Metal 2 dGPUs!
 
-4. For non-AVX2 CPUs, you need to disable f16c sysctl reporting to resolve CoreGraphics.framework crashing in macOS 13.3+:
+4. For non-AVX2 CPUs, you need to disable f16c sysctl reporting to resolve CoreGraphics.framework crashing or/and Safari rendering in macOS 13.3+:
 
 -   Add `revpatch=16c` to `NVRAM -> Add -> 7C436110-AB2A-4BBB-A880-FE41995C9F82 -> boot-args`
 
-5. OCLP now works with Ventura since 0.5.0+! (for 13.3+, use at least 0.6.3 to fully address mentioned issues above!)
+5. OCLP now works with Ventura since 0.5.0+! (for 13.3+, use at least 0.6.4 to fully address mentioned issues above!)
 
 -   https://github.com/dortania/OpenCore-Legacy-Patcher/releases/
 
