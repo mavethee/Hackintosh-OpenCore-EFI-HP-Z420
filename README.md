@@ -3,11 +3,11 @@
 ## Hackintosh-OpenCore-HP-Z420
 EFI premade of OpenCore bootloader for HP-Z420 is here and it runs Ventura!
 
-## Current version - OpenCore 0.9.1 DEBUG
+## Current version - OpenCore 0.9.2 DEBUG
 Repository contains full ,,Plug-and-Play" EFI of OpenCore bootloader and
 all needed files to install and run macOS on HP Z420!
 
-https://github.com/acidanthera/OpenCorePkg/releases/tag/0.9.1
+https://github.com/acidanthera/OpenCorePkg/releases/tag/0.9.2
 
 <img src="https://media.discordapp.net/attachments/321319496990326784/1065988767749505104/Zrzut_ekranu_2023-01-20_o_14.38.02.png">
 
@@ -70,9 +70,9 @@ Post-Install, you can optionally use EFI from repo's main EFI folder with MacPro
 
 -   Add `revpatch=16c` to `NVRAM -> Add -> 7C436110-AB2A-4BBB-A880-FE41995C9F82 -> boot-args`
 
-5. OCLP now works with Ventura since 0.5.0+! (for 13.3+, use at least 0.6.4 to fully address mentioned issues above!)
+5. OCLP now works with Ventura since 0.5.0+! (for 13.3+, use at least 0.6.7 (AMFIPass Beta Testing!) to fully address mentioned issues above!)
 
--   https://github.com/dortania/OpenCore-Legacy-Patcher/releases/
+-   https://github.com/dortania/OpenCore-Legacy-Patcher/releases/tag/amfipass-beta-test
 
 6. While Legacy Metal dGPUs work for most part, there are still some issues you might want to track:
 
@@ -97,6 +97,14 @@ Post-Install, you can optionally use EFI from repo's main EFI folder with MacPro
 -   Flash your config.plist, reboot macOS and launch OCLP,
 
 8. Follow OCLP prompts and reboot. **Done! GPU acceleration in Ventura is working!**
+
+9. (AMFIPass Beta-Testing):
+
+-   Ensure you have AMFIPass.kext (included with repo, for now seems to be not obtainable aside OCLP, will update link later)
+
+-   Re-enable AMFI (+Fix for Electron apps on 12.3+) by removing  `amfi=0x80 ipc_control_port_options=0` to `NVRAM -> Add -> 7C436110-AB2A-4BBB-A880-FE41995C9F82 -> boot-args`
+
+-   Reboot and enjoy! :D
 
 Sources:
 
