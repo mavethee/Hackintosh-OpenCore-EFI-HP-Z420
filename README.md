@@ -11,7 +11,7 @@ https://github.com/acidanthera/OpenCorePkg/releases/tag/0.9.3
 
 <img src="https://media.discordapp.net/attachments/321319496990326784/1065988767749505104/Zrzut_ekranu_2023-01-20_o_14.38.02.png">
 
-# Sonoma NOTE (for Ventura and older, skip to Installation section):
+## Sonoma NOTE (for Ventura and older, skip to Installation section):
 
 <img src="https://media.discordapp.net/attachments/724306793819275309/1118201389953331270/HPZ420.png">
 
@@ -48,7 +48,8 @@ https://dortania.github.io/GPU-Buyers-Guide/misc/bootflag.html#amd-boot-argument
 Keep in mind, even tho Legacy AMD Polaris/Vega would be best choice right now, things are still in development for both sides.
 
 THINGS MAY BREAK OR CONTAIN GRAPHICAL GLITCHES!
-# Installation:
+
+## Installation:
 
 Internal USB 3.0 doesnt work although USB 2.0 ones should work, USB mapping actually does something so uploading USB map kexts in case it does something with your machine! ^^
 
@@ -72,7 +73,7 @@ Post-Install, you can optionally use EFI from repo's main EFI folder with MacPro
 
 (As you may see on picture above, that's just my workaround over Apple's blacklist I guess, feel free to suggest how to do it without double EFIs),
 
-# What has been done and must be done to make it boot?
+## What has been done and must be done to make it boot?
 
 0. For macOS 13 use OpenCore 0.8.3+, latest is recommended. !Avoid installing RSR updates! RSR updates DO NOT WORK due Rosetta Cryptex!
 
@@ -147,13 +148,13 @@ Sources:
 * https://dortania.github.io/OpenCore-Legacy-Patcher/VENTURA-DROP.html#currently-unsupported-broken-hardware-in-ventura
 
 
-# What works:
+## What works:
 * Ethernet,
 * Audio,
 * USB (except internal USB3 ports),
 * iServices (iMessage, FaceTime, AppStore, iCloud, etc.).
 
-# What doesn't work:
+## What doesn't work:
 * Internal USB3 ports,
 * Sleep (Clicking sounds on wake-up attempt),
 * Fan Monitoring (needs to be manually mapped in config.plist, I didn't figure it out yet)
