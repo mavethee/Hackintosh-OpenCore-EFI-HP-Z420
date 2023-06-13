@@ -3,25 +3,51 @@
 ## Hackintosh-OpenCore-HP-Z420
 EFI premade of OpenCore bootloader for HP-Z420 is here and it runs Ventura!
 
-## Current version - OpenCore 0.9.2 DEBUG
+## Current version - OpenCore 0.9.3 DEBUG
 Repository contains full ,,Plug-and-Play" EFI of OpenCore bootloader and
 all needed files to install and run macOS on HP Z420!
 
-https://github.com/acidanthera/OpenCorePkg/releases/tag/0.9.2
+https://github.com/acidanthera/OpenCorePkg/releases/tag/0.9.3
 
 <img src="https://media.discordapp.net/attachments/321319496990326784/1065988767749505104/Zrzut_ekranu_2023-01-20_o_14.38.02.png">
 
-# What works:
-* Ethernet,
-* Audio,
-* USB (except internal USB3 ports),
-* iServices (iMessage, FaceTime, AppStore, iCloud, etc.).
+# Sonoma NOTE (for Ventura and older, skip to Installation section):
 
-# What doesn't work:
-* Internal USB3 ports,
-* Sleep (Clicking sounds on wake-up attempt),
-* Fan Monitoring (needs to be manually mapped in config.plist, I didn't figure it out yet)
+<img src="https://media.discordapp.net/attachments/724306793819275309/1118201389953331270/HPZ420.png">
 
+(Reference image has no acceleration as it runs the worst possible choice, 3802-based Metal GPU, which is Kepler)
+
+To run Sonoma succesfully you need at least OpenCore 0.9.3+! (Officially 0.8.3, but that only refers to AVX2 machines, again latest release is desired anyways!)
+
+!REMEMBER TO DISABLE AMFI AS `AMFIPass` PROBABLY DOESN'T WORK!
+
+By making sure that `amfi=0x80 ipc_control_port_options=0` is set in `NVRAM -> Add -> 7C436110-AB2A-4BBB-A880-FE41995C9F82 -> boot-args`!
+
+At current state the best solution for running macOS 14 Sonoma would be getting a Polaris or Navi GPUs!
+
+Despite being natively supported you should use OCLP and booting from VESA mode:
+
+`NVRAM -> Add -> 7C436110-AB2A-4BBB-A880-FE41995C9F82 -> boot-args -> amd_no_dgpu_accel`
+
+This will disable dGPU acceleration and allow you to boot into macOS 14 Sonoma!
+
+Root Patch installed macOS 14 (DO NOT INSTALL FROM MODIFIED USB BY OCLP, IN CASE OF ANY FUCKUP!) using Sonoma branch:
+
+https://github.com/dortania/OpenCore-Legacy-Patcher/actions/workflows/build-app-wxpython.yml?query=branch%3Asonoma-development
+
+(Pick latest one -> scroll down to articafts -> download ZIP file)
+
+Follow OCLP prompts and reboot!
+
+Sources:
+
+https://github.com/dortania/OpenCore-Legacy-Patcher/pull/1077 (I've included most fixes already, besides Polaris/Vega specifics as I don't own this GPU)
+
+https://dortania.github.io/GPU-Buyers-Guide/misc/bootflag.html#amd-boot-arguments (AMD Boot Args deep-dive if something will go wrong)
+
+Keep in mind, even tho Legacy AMD Polaris/Vega would be best choice right now, things are still in development for both sides.
+
+THINGS MAY BREAK OR CONTAIN GRAPHICAL GLITCHES!
 # Installation:
 
 Internal USB 3.0 doesnt work although USB 2.0 ones should work, USB mapping actually does something so uploading USB map kexts in case it does something with your machine! ^^
@@ -56,7 +82,7 @@ Post-Install, you can optionally use EFI from repo's main EFI folder with MacPro
 
     **Side note:** Polaris and Vega dGPUs DO work, but require root patching just like Legacy Metal ones, Navi won't work!
 
-2. Lack of AVX2 instruction set requires more fun with macOS 13 installation, so be aware! You need CryptexFixup to even boot!
+2. Lack of AVX2 instruction set requires more fun with macOS 13+ installation, so be aware! You need CryptexFixup to even boot!
 
 -   https://github.com/acidanthera/CryptexFixup
 
@@ -120,6 +146,17 @@ Sources:
 
 * https://dortania.github.io/OpenCore-Legacy-Patcher/VENTURA-DROP.html#currently-unsupported-broken-hardware-in-ventura
 
+
+# What works:
+* Ethernet,
+* Audio,
+* USB (except internal USB3 ports),
+* iServices (iMessage, FaceTime, AppStore, iCloud, etc.).
+
+# What doesn't work:
+* Internal USB3 ports,
+* Sleep (Clicking sounds on wake-up attempt),
+* Fan Monitoring (needs to be manually mapped in config.plist, I didn't figure it out yet)
 # Monterey NOTE:
 
 Current config is prepared for booting Ventura so if you want to run Monterey, **revert Ventura NOTE steps.**
