@@ -9,11 +9,11 @@ all needed files to install and run macOS on HP Z420!
 
 https://github.com/acidanthera/OpenCorePkg/releases/tag/0.9.3
 
-<img src="https://media.discordapp.net/attachments/321319496990326784/1065988767749505104/Zrzut_ekranu_2023-01-20_o_14.38.02.png">
+<img src="https://media.discordapp.net/attachments/724306793819275309/1121427312613789756/HPZ420_13.4.1.png">
 
 ## Sonoma NOTE (for Ventura and older, skip to Installation section):
 
-<img src="https://media.discordapp.net/attachments/724306793819275309/1118201389953331270/HPZ420.png">
+<img src="https://media.discordapp.net/attachments/724306793819275309/1121427313230348338/HPZ420_B2.png">
 
 (Reference image has no acceleration as it runs the worst possible choice, 3802-based Metal GPU, which is Kepler)
 
