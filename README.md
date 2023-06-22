@@ -23,7 +23,7 @@ To run Sonoma succesfully you need at least OpenCore 0.9.3+! (Officially 0.8.3, 
 
 By making sure that `amfi=0x80 ipc_control_port_options=0` is set in `NVRAM -> Add -> 7C436110-AB2A-4BBB-A880-FE41995C9F82 -> boot-args`!
 
-At current state the best solution for running macOS 14 Sonoma would be getting a Polaris or Navi GPUs!
+At current state the best solution for running macOS 14 Sonoma would be getting a Polaris or Vega GPUs! (Navi GPUs DO NOT WORK with OCLP!)
 
 Despite being natively supported you should use OCLP and booting from VESA mode:
 
