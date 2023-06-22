@@ -1,221 +1,135 @@
-<img src="https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/Logos/OpenCore_with_text_Small.png" width="200" height="48"/>
+![OpenCore Logo](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/Logos/OpenCore_with_text_Small.png)
 
-## Hackintosh-OpenCore-HP-Z420
-EFI premade of OpenCore bootloader for HP-Z420 is here and it runs Ventura!
+# Hackintosh-OpenCore-HP-Z420
 
-## Current version - OpenCore 0.9.3 DEBUG
-Repository contains full ,,Plug-and-Play" EFI of OpenCore bootloader and
-all needed files to install and run macOS on HP Z420!
+**Premade EFI of OpenCore bootloader for HP Z420 is here, running Ventura and Sonoma!**
 
-https://github.com/acidanthera/OpenCorePkg/releases/tag/0.9.3
+## Current Version: [OpenCore 0.9.4 DEBUG](https://github.com/acidanthera/OpenCorePkg/releases/tag/0.9.4)
 
-<img src="https://media.discordapp.net/attachments/724306793819275309/1121427312613789756/HPZ420_13.4.1.png">
+This repository provides a complete "Plug-and-Play" EFI setup for the OpenCore bootloader, along with all necessary files to install and run macOS on an HP Z420.
 
-## Sonoma NOTE (for Ventura and older, skip to Installation section):
+## Table of Contents
 
-<img src="https://media.discordapp.net/attachments/724306793819275309/1121427313230348338/HPZ420_B2.png">
+- [Running macOS Sonoma](#sonoma-notes)
+- [Installation Guide](#installation)
+- [Notes for macOS Monterey](Notes/Monterey-NOTES.md)
 
-(Reference image has no acceleration as it runs the worst possible choice, 3802-based Metal GPU, which is Kepler)
+## What's Required to Make It Boot
 
-To run Sonoma succesfully you need at least OpenCore 0.9.3+! (Officially 0.8.3, but that only refers to AVX2 machines, again latest release is desired anyways!)
+![HP Z420 Screenshot](Screenshots/HPZ420_Ventura.png)
 
-!REMEMBER TO DISABLE AMFI AS `AMFIPass` PROBABLY DOESN'T WORK!
+1. For macOS 13 and newer, use OpenCore 0.8.3+ (latest recommended). **Avoid RSR updates as they don't work with Rosetta Cryptex.**
 
-By making sure that `amfi=0x80 ipc_control_port_options=0` is set in `NVRAM -> Add -> 7C436110-AB2A-4BBB-A880-FE41995C9F82 -> boot-args`!
+2. Native dGPUs with AVX2 support are recommended. For Polaris and Vega dGPUs, root patching is required, but Navi GPUs are not supported.
 
-At current state the best solution for running macOS 14 Sonoma would be getting a Polaris or Vega GPUs! (Navi GPUs DO NOT WORK with OCLP!)
+3. Lack of AVX2 requires CryptexFixup for macOS 13+.
 
-Despite being natively supported you should use OCLP and booting from VESA mode:
+4. For Metal 1 dGPUs (e.g., Kepler), disable mediaanalysisd using `revblock=media` in NVRAM settings.
 
-`NVRAM -> Add -> 7C436110-AB2A-4BBB-A880-FE41995C9F82 -> boot-args -> amd_no_dgpu_accel`
+5. For non-AVX2 CPUs, disable f16c sysctl reporting by adding `revpatch=16c` to NVRAM settings.
 
-This will disable dGPU acceleration and allow you to boot into macOS 14 Sonoma!
+6. OCLP now works with Ventura since 0.5.0+. For Sonoma, OCLP 0.6.9 is recommended.
 
-Root Patch installed macOS 14 (DO NOT INSTALL FROM MODIFIED USB BY OCLP, IN CASE OF ANY FUCKUP!) using Sonoma branch:
+7. While Legacy Metal dGPUs work for most part, there are still some issues.
 
-https://github.com/dortania/OpenCore-Legacy-Patcher/actions/workflows/build-app-wxpython.yml?query=branch%3Asonoma-development
+8. Follow OCLP preparation steps, including setting SIP to 0x308 and disabling Apple Secure Boot.
 
-(Pick latest one -> scroll down to articafts -> download ZIP file)
-
-Follow OCLP prompts and reboot!
+9. Use AMFIPass (AMFIPass-v1.3.1-RELEASE.zip) and re-enable AMFI for Sonoma.
 
 Sources:
+- [macOS Ventura and OpenCore Legacy Patcher Support](https://github.com/dortania/OpenCore-Legacy-Patcher/issues/998)
+- [Legacy Metal Graphics Support and macOS Ventura - Sonoma](https://github.com/dortania/OpenCore-Legacy-Patcher/issues/1008)
+- [Idle panic on Metal 1 GPUs during face analysis](https://github.com/dortania/OpenCore-Legacy-Patcher/pull/1013)
+- [Rapid Security Response with legacy Macs](https://github.com/dortania/OpenCore-Legacy-Patcher/issues/1019)
+- [Resolve CoreGraphics.framework crashing](https://github.com/dortania/OpenCore-Legacy-Patcher/commit/c0825ed24e98688ff430c30324f11b5c41840b8a)
+- [Currently unsupported hardware in Ventura](https://dortania.github.io/OpenCore-Legacy-Patcher/VENTURA-DROP.html#currently-unsupported-broken-hardware-in-ventura)
 
-https://github.com/dortania/OpenCore-Legacy-Patcher/pull/1077 (I've included most fixes already, besides Polaris/Vega specifics as I don't own this GPU)
+## Sonoma Notes
 
-https://dortania.github.io/GPU-Buyers-Guide/misc/bootflag.html#amd-boot-arguments (AMD Boot Args deep-dive if something will go wrong)
+![HP Z420 Sonoma Screenshot](Screenshots/HPZ420_Sonoma.png)
 
-Keep in mind, even tho Legacy AMD Polaris/Vega would be best choice right now, things are still in development for both sides.
+To run Sonoma successfully, you need at least OpenCore 0.9.3+ (officially 0.8.3 for AVX2 machines). Remember, Sonoma is not a KDKless install, so `KDKLessWorkaround` won't work.
 
-THINGS MAY BREAK OR CONTAIN GRAPHICAL GLITCHES!
+Install macOS 14 using the latest nightly builds open for public: [Nightly.link: OpenCore-Patcher.app (Sonoma Development)](https://nightly.link/dortania/OpenCore-Legacy-Patcher/workflows/build-app-wxpython/sonoma-development/OpenCore-Patcher.app%20%28GUI%29.zip).
 
-## Installation:
-
-Internal USB 3.0 doesnt work although USB 2.0 ones should work, USB mapping actually does something so uploading USB map kexts in case it does something with your machine! ^^
-
-https://github.com/corpnewt/USBMap/blob/master/README.md#quick-start
-
-For working USB 3.0 I used this PCIe expansion card (native support, no kexts needed), although keep figuring out why BIOS doesn't care about it, appears only on OS level:
-
-https://www.amazon.pl/Inateck-Karta-USB-porty-ExpresCard/dp/B00HJ1DULE?th=1
-
-(for Monterey, just skip part below and scroll down to Monterey notes if you have Metal dGPU dropped in Monterey e.g Kepler)
-
-To sucessfully perform macOS Ventura installation, you need MacPro7,1 SMBIOS! 
-
--   Use EFI from `MP7,1_InstallEFI` folder (if still won't detect your USBs properly, see USB section on bottom of the README).
-
-    Present in repo SMBIOS is probably invalid/not purchased Apple's device but for own sake, I don't advice you to use it.
-
-    Use GenSMBIOS: https://github.com/corpnewt/GenSMBIOS for that to regenerate MacPro7,1
-
-Post-Install, you can optionally use EFI from repo's main EFI folder with MacPro6,1, pure astetics related to more matching hardware ;)
-
-(As you may see on picture above, that's just my workaround over Apple's blacklist I guess, feel free to suggest how to do it without double EFIs),
-
-## What has been done and must be done to make it boot?
-
-0. For macOS 13 use OpenCore 0.8.3+, latest is recommended. !Avoid installing RSR updates! RSR updates DO NOT WORK due Rosetta Cryptex!
-
-1. Natively supported dGPUs require AVX2 support so you are dependent only on Legacy Metal dGPU and OCLP!
-
--   https://github.com/dortania/OpenCore-Legacy-Patcher/issues/998#issuecomment-1166340370
-
-    **Side note:** Polaris and Vega dGPUs DO work, but require root patching just like Legacy Metal ones, Navi won't work!
-
-2. Lack of AVX2 instruction set requires more fun with macOS 13+ installation, so be aware! You need CryptexFixup to even boot!
-
--   https://github.com/acidanthera/CryptexFixup
-
-3. If you are using Metal 1 dGPU, e.g Kepler dGPUs, disable mediaanalysisd which requires Metal 2 feature set!
-
--   Add `revblock=media` to `NVRAM -> Add -> 7C436110-AB2A-4BBB-A880-FE41995C9F82 -> boot-args`
-
-    !Remove on Metal 2 dGPUs!
-
-4. For non-AVX2 CPUs, you need to disable f16c sysctl reporting to resolve CoreGraphics.framework crashing or/and Safari rendering in macOS 13.3+:
-
--   Add `revpatch=16c` to `NVRAM -> Add -> 7C436110-AB2A-4BBB-A880-FE41995C9F82 -> boot-args`
-
-5. OCLP now works with Ventura since 0.5.0+! (for 13.3+, use at least 0.6.7 (AMFIPass Beta Testing!) to fully address mentioned issues above!)
-
--   https://github.com/dortania/OpenCore-Legacy-Patcher/releases/tag/amfipass-beta-test
-
-6. While Legacy Metal dGPUs work for most part, there are still some issues you might want to track:
-
-    https://github.com/dortania/OpenCore-Legacy-Patcher/issues/1008#issue-1400530902
-
-7. OCLP preparation (already applied, listing to actually teach you something):
-
--   SET SIP to 0x308: `NVRAM -> Add -> 7C436110-AB2A-4BBB-A880-FE41995C9F82 -> csr-active-config` to `03080000`
-
--   Disable Apple Secure Boot: `Misc -> Security -> SecureBootModel` to `Disable` 
-
--   Disable Signed DMGs loading: `Misc -> Security -> DmgLoading` to `Any`
-
--   Disable AMFI (+Fix for Electron apps on 12.3+):  `amfi=0x80 ipc_control_port_options=0` to `NVRAM -> Add -> 7C436110-AB2A-4BBB-A880-FE41995C9F82 -> boot-args`
-
--   Reset NVRAM using `ResetNvramEntry.efi` in `EFI\OC\DRIVERS`
-
--   (Optional) For auto root patching your unsupported dGPU generate `AutoPkgInstaller.kext` and add it to your `EFI\OC\KEXTS`:
-
-    https://github.com/dortania/OpenCore-Legacy-Patcher/blob/main/payloads/Kexts/Acidanthera/AutoPkgInstaller-v1.0.2-DEBUG.zip
-
--   Flash your config.plist, reboot macOS and launch OCLP,
-
-8. Follow OCLP prompts and reboot. **Done! GPU acceleration in Ventura is working!**
-
-9. (AMFIPass Beta-Testing):
-
--   Ensure you have AMFIPass.kext (included with repo, for now seems to be not obtainable aside OCLP, will update link later)
-
--   Re-enable AMFI (+Fix for Electron apps on 12.3+) by removing  `amfi=0x80 ipc_control_port_options=0` to `NVRAM -> Add -> 7C436110-AB2A-4BBB-A880-FE41995C9F82 -> boot-args`
-
--   Reboot and enjoy! :D
+Follow OCLP prompts and reboot.
 
 Sources:
+- [macOS Sonoma and OpenCore Legacy Patcher Support](https://github.com/dortania/OpenCore-Legacy-Patcher/issues/1076)
+- [Preliminary support for macOS Sonoma](https://github.com/dortania/OpenCore-Legacy-Patcher/pull/1077)
 
-* https://github.com/dortania/OpenCore-Legacy-Patcher/issues/998 
+**Please note: Things are still in development for both sides, and there may be issues or graphical glitches.**
 
-* https://github.com/dortania/OpenCore-Legacy-Patcher/issues/1008
+## Installation
 
-* https://github.com/dortania/OpenCore-Legacy-Patcher/pull/1013
+Internal USB 3.0 doesn't work, but USB 2.0 ports should function properly.
 
-* https://github.com/dortania/OpenCore-Legacy-Patcher/issues/1019
+USB mapping is important, so consider using USBMap's QUICKSTART guide [here](https://github.com/corpnewt/USBMap/blob/master/README.md#quick-start).
 
-* https://github.com/dortania/OpenCore-Legacy-Patcher/commit/c0825ed24e98688ff430c30324f11b5c41840b8a
+For USB 3.0, consider using the [Inatek KT4004 PCIe expansion card](https://www.amazon.pl/Inateck-Karta-USB-porty-ExpresCard/dp/B00HJ1DULE?th=1), which has native support.
 
-* https://dortania.github.io/OpenCore-Legacy-Patcher/VENTURA-DROP.html#currently-unsupported-broken-hardware-in-ventura
+To install macOS Ventura or newer successfully, use MacPro7,1 SMBIOS or the `force-vmm-install` branch of RestrictEvents. 
 
+- Use EFI from the `MP7,1_InstallEFI` folder (if USB detection issues persist, see the USB section at the end of this README).
 
-## What works:
-* Ethernet,
-* Audio,
-* USB (except internal USB3 ports),
-* iServices (iMessage, FaceTime, AppStore, iCloud, etc.).
+- Avoid using the present SMBIOS, as it's likely invalid. Regenerate MacPro7,1 with [GenSMBIOS](https://github.com/corpnewt/GenSMBIOS).
 
-## What doesn't work:
-* Internal USB3 ports,
-* Sleep (Clicking sounds on wake-up attempt),
-* Fan Monitoring (needs to be manually mapped in config.plist, I didn't figure it out yet)
-# Monterey NOTE:
+- For RestrictEvents' `force-vmm-branch` artifacts (only if not using MacPro7,1 SMBIOS), see [here](https://github.com/acidanthera/RestrictEvents/actions/workflows/main.yml?query=branch%3Aforce-vmm-install).
 
-Current config is prepared for booting Ventura so if you want to run Monterey, **revert Ventura NOTE steps.**
+Regardless of your choice, it's recommended to use a hardware-matching SMBIOS for a smoother experience.
 
-0.   Remove Ventura related kexts:
+## Monterey Notes
 
-    `EFI/OC/Kexts/CryptexFixup.kext`
+![HP Z420 Monterey Screenshot](Screenshots/HPZ420_Monterey.png)
 
-    `EFI/OC/Kexts/KDKLessWorkaround.kext`
+### Current config is prepared for booting Sonoma, so if you want to run Monterey, **revert Ventura and Sonoma NOTE steps.**
 
-## For unsupported dGPU, follow the steps below (for natively supported dGPUs, please refer to default settings in Dortania's Guide):
+0. Remove Sonoma and Ventura related kexts:
+   - `EFI/OC/Kexts/CryptexFixup.kext` (Allows non-AVX2 systems to boot on macOS 13 and newer)
+   - `EFI/OC/Kexts/KDKLessWorkaround.kext` (Ventura only, KDKless install for macOS 14)
 
-1.   SET SIP to 0x802: 
+### For unsupported dGPU:
 
-    `NVRAM -> Add -> 7C436110-AB2A-4BBB-A880-FE41995C9F82 -> csr-active-config -> 02080000`
+1. Set SIP to 0x802: `NVRAM -> Add -> 7C436110-AB2A-4BBB-A880-FE41995C9F82 -> csr-active-config -> 02080000`
 
-2.   Disable Apple Secure Boot:
+2. Disable Apple Secure Boot: `Misc -> Security -> SecureBootModel -> Disable`
 
-    `Misc -> Security -> SecureBootModel -> Disable` 
+3. Disable Signed DMGs loading: `Misc -> Security -> DmgLoading -> Any`
 
-3.   Disable Signed DMGs loading:
+4. Reset NVRAM using `ResetNvramEntry.efi` in `EFI/OC/DRIVERS`.
 
-    `Misc -> Security -> DmgLoading -> Any`
+5. (Optional) For auto root patching your unsupported dGPU, add `AutoPkgInstaller.kext` to your `EFI/OC/KEXTS` from [here](https://github.com/dortania/OpenCore-Legacy-Patcher/blob/main/payloads/Kexts/Acidanthera/AutoPkgInstaller-v1.0.2-DEBUG.zip).
 
-4.   Reset NVRAM using `ResetNvramEntry.efi` in `EFI\OC\DRIVERS`
+6. Flash your config.plist, reboot macOS, and launch OCLP.
 
-5.   (Optional) For auto root patching your unsupported dGPU - add `AutoPkgInstaller.kext` to your `EFI\OC\KEXTS`:
+7. Follow OCLP prompts and reboot.
 
-        https://github.com/dortania/OpenCore-Legacy-Patcher/blob/main/payloads/Kexts/Acidanthera/AutoPkgInstaller-v1.0.1-DEBUG.zip
+## What Works
 
-6. Flash your config.plist, reboot macOS and launch OCLP,
+- Ethernet
+- Audio
+- USB (except internal USB3 ports)
+- iServices (iMessage, FaceTime, AppStore, iCloud, etc.)
 
-7. Follow OCLP prompts and reboot. **Done! GPU acceleration in Monterey is back again!**
+## What Doesn't Work
 
-## Credits:
-### AutoPkgInstaller:
-https://github.com/dortania/OpenCore-Legacy-Patcher/blob/main/payloads/Kexts/Acidanthera/AutoPkgInstaller-v1.0.2-DEBUG.zip
-### CryptexFixup:
-https://github.com/acidanthera/CryptexFixup
-### FeatureUnlock:
-https://github.com/acidanthera/FeatureUnlock
-### HibernationFixup:
-https://github.com/acidanthera/HibernationFixup
-### IntelMausi:
-https://github.com/acidanthera/IntelMausi
-### KDKLessWorkaround
-https://github.com/dortania/OpenCore-Legacy-Patcher/blob/main/payloads/Kexts/Misc/KDKlessWorkaround-v1.0.0-DEBUG.zip
-### Lilu:
-https://github.com/acidanthera/Lilu/
-### OpenCorePkg:
-https://github.com/acidanthera/OpenCorePkg
-### OpenCanopy's resources:
-https://github.com/acidanthera/OcBinaryData
-### OpenCore Legacy Patcher:
-https://github.com/dortania/OpenCore-Legacy-Patcher
-### RestrictEvents:
-https://github.com/acidanthera/RestrictEvents
-### VirtualSMC:
-https://github.com/acidanthera/VirtualSMC
-### WhateverGreen:
-https://github.com/acidanthera/WhateverGreen
+- Internal USB3 ports
+- Sleep (Clicking sounds on wake-up attempt)
+- Fan Monitoring (needs to be manually mapped in config.plist)
+
+## Credits
+
+- [AMFIPass](https://github.com/dortania/OpenCore-Legacy-Patcher/blob/main/payloads/Kexts/Acidanthera/AMFIPass-v1.3.1-RELEASE.zip)
+- [AutoPkgInstaller](https://github.com/dortania/OpenCore-Legacy-Patcher/blob/main/payloads/Kexts/Acidanthera/AutoPkgInstaller-v1.0.2-DEBUG.zip)
+- [CryptexFixup](https://github.com/acidanthera/CryptexFixup/releases/)
+- [FeatureUnlock](https://github.com/acidanthera/FeatureUnlock/releases/)
+- [HibernationFixup](https://github.com/acidanthera/HibernationFixup/releases/)
+- [IntelMausi](https://github.com/acidanthera/IntelMausi/releases/)
+- [KDKLessWorkaround](https://github.com/dortania/OpenCore-Legacy-Patcher/blob/main/payloads/Kexts/Misc/KDKlessWorkaround-v1.0.0-DEBUG.zip)
+- [Lilu](https://github.com/acidanthera/Lilu/releases/)
+- [OpenCorePkg](https://github.com/acidanthera/OpenCorePkg/releases/)
+- [OpenCanopy's resources](https://github.com/acidanthera/OcBinaryData)
+- [OpenCore Legacy Patcher](https://github.com/dortania/OpenCore-Legacy-Patcher/releases/)
+- [RestrictEvents](https://github.com/acidanthera/RestrictEvents/releases/)
+- [VirtualSMC](https://github.com/acidanthera/VirtualSMC/releases/)
+- [WhateverGreen](https://github.com/acidanthera/WhateverGreen/releases/)
