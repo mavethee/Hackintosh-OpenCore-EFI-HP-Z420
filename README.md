@@ -1,20 +1,35 @@
-![OpenCore Logo](https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/Logos/OpenCore_with_text_Small.png)
+<img src="https://github.com/acidanthera/OpenCorePkg/blob/master/Docs/Logos/OpenCore_with_text_Small.png" width="200" height="48">
 
 # Hackintosh-OpenCore-HP-Z420
 
 **Premade EFI of OpenCore bootloader for HP Z420 is here, running Ventura and Sonoma!**
 
-## Current Version: [OpenCore 0.9.4 DEBUG](https://github.com/acidanthera/OpenCorePkg/releases/tag/0.9.4)
+## Current Version: [OpenCore 0.9.5 DEBUG](https://github.com/acidanthera/OpenCorePkg/releases/tag/0.9.5)
 
 This repository provides a complete "Plug-and-Play" EFI setup for the OpenCore bootloader, along with all necessary files to install and run macOS on an HP Z420.
 
 ## Table of Contents
-
+- [Download](#download)
+- [What's Required to Make It Boot?](#whats-required-to-make-it-boot)
 - [Running macOS Sonoma](#sonoma-notes)
 - [Installation Guide](#installation)
 - [Notes for macOS Monterey](Notes/Monterey-NOTES.md)
 
-## What's Required to Make It Boot
+## Download
+
+```sh
+
+# Clone this repository:
+git clone https://github.com/mavethee/Hackintosh-OpenCore-EFI-HP-Z420.git && cd Hackintosh-OpenCore-EFI-HP-Z420
+```
+
+OR 
+
+`Code` -> `Downaload ZIP`
+
+Pick either MacPro6,1 or MacPro7,1 EFI depending for your likings, read below.
+
+## What's Required to Make It Boot?
 
 ![HP Z420 Screenshot](Screenshots/HPZ420_Ventura.png)
 
@@ -28,7 +43,7 @@ This repository provides a complete "Plug-and-Play" EFI setup for the OpenCore b
 
 5. For non-AVX2 CPUs, disable f16c sysctl reporting by adding `revpatch=16c` to NVRAM settings.
 
-6. OCLP now works with Ventura since 0.5.0+. For Sonoma, OCLP 0.6.9 is recommended.
+6. OCLP now works with Ventura since 0.5.0+. For Sonoma, OCLP 0.6.9 nightlies is recommended.
 
 7. While Legacy Metal dGPUs work for most part, there are still some issues.
 
@@ -48,9 +63,11 @@ Sources:
 
 ![HP Z420 Sonoma Screenshot](Screenshots/HPZ420_Sonoma.png)
 
-To run Sonoma successfully, you need at least OpenCore 0.9.3+ (officially 0.8.3 for AVX2 machines). Remember, Sonoma is not a KDKless install, so `KDKLessWorkaround` won't work.
+To run Sonoma successfully, you need at least OpenCore 0.9.3+ (officially 0.8.3 for AVX2 machines). KDKless install is now possible! 🎉
 
-Install macOS 14 using the latest nightly builds open for public: [Nightly.link: OpenCore-Patcher.app (Sonoma Development)](https://nightly.link/dortania/OpenCore-Legacy-Patcher/workflows/build-app-wxpython/sonoma-development/OpenCore-Patcher.app%20%28GUI%29.zip).
+Install macOS 14, then in post install patch your system using the latest nightly builds open for public: 
+
+[Nightly.link: OpenCore-Patcher.app (Sonoma Development)](https://nightly.link/dortania/OpenCore-Legacy-Patcher/workflows/build-app-wxpython/sonoma-development/OpenCore-Patcher.app%20%28GUI%29.zip).
 
 Follow OCLP prompts and reboot.
 
@@ -76,6 +93,8 @@ To install macOS Ventura or newer successfully, use MacPro7,1 SMBIOS or the `for
 
 - For RestrictEvents' `force-vmm-branch` artifacts (only if not using MacPro7,1 SMBIOS), see [here](https://github.com/acidanthera/RestrictEvents/actions/workflows/main.yml?query=branch%3Aforce-vmm-install).
 
+(^Technically both EFIs include both changes but sometimes it losts while maintaining this EFIs, so make sure to validate this one.)
+
 Regardless of your choice, it's recommended to use a hardware-matching SMBIOS for a smoother experience.
 
 ## Monterey Notes
@@ -86,7 +105,7 @@ Regardless of your choice, it's recommended to use a hardware-matching SMBIOS fo
 
 0. Remove Sonoma and Ventura related kexts:
    - `EFI/OC/Kexts/CryptexFixup.kext` (Allows non-AVX2 systems to boot on macOS 13 and newer)
-   - `EFI/OC/Kexts/KDKLessWorkaround.kext` (Ventura only, KDKless install for macOS 14)
+   - `EFI/OC/Kexts/KDKLessWorkaround.kext` (Ventura only, KDKless install for macOS 14 is not possible yet)
 
 ### For unsupported dGPU:
 
