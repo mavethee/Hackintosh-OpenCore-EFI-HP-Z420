@@ -4,7 +4,7 @@
 
 **Premade EFI of OpenCore bootloader for HP Z420 is here, running Ventura and Sonoma!**
 
-## Current Version: [OpenCore 0.9.6 DEBUG](https://github.com/acidanthera/OpenCorePkg/releases/tag/0.9.6)
+## Current Version: [OpenCore 0.9.7 DEBUG](https://github.com/acidanthera/OpenCorePkg/releases/tag/0.9.7)
 
 This repository provides a complete "Plug-and-Play" EFI setup for the OpenCore bootloader, along with all necessary files to install and run macOS on an HP Z420.
 
@@ -40,9 +40,11 @@ Pick either `MacPro6,1` or `MacPro7,1` EFI depending for your likings, as with c
 
 1. To run Sonoma successfully, you need at least OpenCore 0.9.3+ (officially 0.8.3 for AVX2 machines). KDKless install is now possible! 🎉  **Avoid RSR updates as they don't work with Rosetta Cryptex.**
 
-2. If you face login sreen issues on 14.1+, stay on 14.0 or disable lockscren and set automatic login before updating to latest.
+2. If you face login sreen issues on 14.1+, stay on 14.0 or disable lockscren and set automatic login before updating to latest. (Seems to be something I've only personally faced, but noting for the record):
 
-3. Native dGPUs with AVX2 support are recommended. For Polaris and Vega dGPUs, root patching is required, but Navi GPUs are not supported. (Seems to be something I've only personally faced, but noting for the record).
+`Apple logo -> System settings -> Users and Groups -> Automatic login`
+
+3. Native dGPUs with AVX2 support are recommended. For Polaris and Vega dGPUs, root patching is required, but Navi GPUs are not supported.
 
 4. Lack of AVX2 requires CryptexFixup for macOS 13+.
 
@@ -54,7 +56,15 @@ Pick either `MacPro6,1` or `MacPro7,1` EFI depending for your likings, as with c
 
 8. While Legacy Metal dGPUs work for most part, there are still some issues.
 
-9. Follow OCLP preparation steps, including setting SIP to 0x308 and disabling Apple Secure Boot.
+9. Follow OCLP preparation steps, including setting SIP to `0x308` and disabling `Apple Secure Boot`:
+
+-  Set SIP to 0x803: `NVRAM -> Add -> 7C436110-AB2A-4BBB-A880-FE41995C9F82 -> csr-active-config -> 03080000`
+
+-  Disable Apple Secure Boot: `Misc -> Security -> SecureBootModel -> Disable`
+
+-  Disable Signed DMGs loading: `Misc -> Security -> DmgLoading -> Any`
+
+-  Reset NVRAM using `ResetNvramEntry.efi` in `EFI/OC/DRIVERS`.
 
 10. Use [AMFIPass v.1.4.0](https://github.com/dortania/OpenCore-Legacy-Patcher/blob/main/payloads/Kexts/Acidanthera/AMFIPass-v1.4.0-RELEASE.zip) and re-enable AMFI for Sonoma.
 
