@@ -4,7 +4,7 @@
 
 **Premade EFI of OpenCore bootloader for HP Z420 is here, running Ventura and Sonoma!**
 
-## Current Version: [OpenCore 0.9.7 DEBUG](https://github.com/acidanthera/OpenCorePkg/releases/tag/0.9.7)
+## Current Version: [OpenCore 0.9.8 DEBUG](https://github.com/acidanthera/OpenCorePkg/releases/tag/0.9.8)
 
 This repository provides a complete "Plug-and-Play" EFI setup for the OpenCore bootloader, along with all necessary files to install and run macOS on an HP Z420.
 
