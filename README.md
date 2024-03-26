@@ -4,7 +4,7 @@
 
 **Premade EFI of OpenCore bootloader for HP Z420 is here, running Ventura and Sonoma!**
 
-## Current Version: [OpenCore 0.9.8 DEBUG](https://github.com/acidanthera/OpenCorePkg/releases/tag/0.9.8)
+## Current Version: [OpenCore 0.9.9 DEBUG](https://github.com/acidanthera/OpenCorePkg/releases/tag/0.9.9)
 
 This repository provides a complete "Plug-and-Play" EFI setup for the OpenCore bootloader, along with all necessary files to install and run macOS on an HP Z420.
 
@@ -32,7 +32,7 @@ OR
 
 `Code` -> `Downaload ZIP`
 
-Pick either `MacPro6,1` or `MacPro7,1` EFI depending for your likings, as with current improvements and fixes it's cosmetics, read more below closely.
+Extract, put `EFI` on your USB.
 
 ## What's Required to Make It Boot?
 
@@ -40,35 +40,37 @@ Pick either `MacPro6,1` or `MacPro7,1` EFI depending for your likings, as with c
 
 1. To run Sonoma successfully, you need at least OpenCore 0.9.3+ (officially 0.8.3 for AVX2 machines). KDKless install is now possible! 🎉  **Avoid RSR updates as they don't work with Rosetta Cryptex.**
 
-2. If you face login sreen issues on 14.1+, stay on 14.0 or disable lockscren and set automatic login before updating to latest. (Seems to be something I've only personally faced, but noting for the record):
+- If you face login sreen issues on 14.1+, stay on 14.0 or disable lockscren and set automatic login before updating to latest. (Seems to be something I've only personally faced, but noting for the record):
 
 `Apple logo -> System settings -> Users and Groups -> Automatic login`
 
-3. Native dGPUs with AVX2 support are recommended. For Polaris and Vega dGPUs, root patching is required, but Navi GPUs are not supported.
+**FIXED:** Update to **macOS 14.4+** and Root Patch with **OpenCore Legacy Patcher 1.4.2+**
 
-4. Lack of AVX2 requires CryptexFixup for macOS 13+.
+2. Native dGPUs with AVX2 support are recommended. For Polaris and Vega dGPUs, root patching is required, but Navi GPUs are not supported.
 
-5. For Metal 1 dGPUs (e.g., Kepler), disable mediaanalysisd using `revblock=media` in NVRAM settings.
+3. Lack of AVX2 requires CryptexFixup for macOS 13+.
 
-6. For non-AVX2 CPUs, disable f16c sysctl reporting by adding `revpatch=16c` to NVRAM settings.
+4. For Metal 1 dGPUs (e.g., Kepler), disable mediaanalysisd using `revblock=media` in NVRAM settings.
 
-7. OCLP now works with Ventura since 0.5.0+. For Sonoma, OCLP 1.2.1+ is recommended.
+5. For non-AVX2 CPUs, disable f16c sysctl reporting by adding `revpatch=16c` to NVRAM settings.
 
-8. While Legacy Metal dGPUs work for most part, there are still some issues.
+6. OCLP works with Ventura since 0.5.0+. for Sonoma, it's active development so latest OCLP 1.4.2+ is recommended.
 
-9. Follow OCLP preparation steps, including setting SIP to `0x308` and disabling `Apple Secure Boot`:
+7. While Legacy Metal dGPUs work for most part, there are still some issues.
 
--  Set SIP to 0x803: `NVRAM -> Add -> 7C436110-AB2A-4BBB-A880-FE41995C9F82 -> csr-active-config -> 03080000`
+8. Follow OCLP preparation steps, including setting SIP to `0x308` and disabling `Apple Secure Boot`:
 
--  Disable Apple Secure Boot: `Misc -> Security -> SecureBootModel -> Disable`
+-  Set SIP to 0x803: `NVRAM` -> `Add` -> `7C436110-AB2A-4BBB-A880-FE41995C9F82` -> `csr-active-config` -> `03080000`
 
--  Disable Signed DMGs loading: `Misc -> Security -> DmgLoading -> Any`
+-  Disable Apple Secure Boot: `Misc` -> `Security` -> `SecureBootModel` -> `Disable`
+
+-  Disable Signed DMGs loading: `Misc` -> `Security` -> `DmgLoading` -> `Any`
 
 -  Reset NVRAM using `ResetNvramEntry.efi` in `EFI/OC/DRIVERS`.
 
-10. Use [AMFIPass v.1.4.0](https://github.com/dortania/OpenCore-Legacy-Patcher/blob/main/payloads/Kexts/Acidanthera/AMFIPass-v1.4.0-RELEASE.zip) and re-enable AMFI for Sonoma.
+9. Use [AMFIPass v.1.4.0](https://github.com/dortania/OpenCore-Legacy-Patcher/blob/main/payloads/Kexts/Acidanthera/AMFIPass-v1.4.0-RELEASE.zip) and re-enable AMFI for Sonoma.
 
-11. Install macOS 14, then in post install patch your system using [the latest version of OpenCore Legacy Patcher](https://github.com/dortania/OpenCore-Legacy-Patcher/releases/).
+10. Install macOS 14, then in post install patch your system using [the latest version of OpenCore Legacy Patcher](https://github.com/dortania/OpenCore-Legacy-Patcher/releases/).
 
 Sources:
 - [macOS Sonoma and OpenCore Legacy Patcher Support](https://github.com/dortania/OpenCore-Legacy-Patcher/issues/1076)
@@ -78,6 +80,7 @@ Sources:
 - [Rapid Security Response with legacy Macs](https://github.com/dortania/OpenCore-Legacy-Patcher/issues/1019)
 - [Resolve CoreGraphics.framework crashing](https://github.com/dortania/OpenCore-Legacy-Patcher/commit/c0825ed24e98688ff430c30324f11b5c41840b8a)
 - [Currently unsupported hardware in Ventura](https://dortania.github.io/OpenCore-Legacy-Patcher/VENTURA-DROP.html#currently-unsupported-broken-hardware-in-ventura)
+- ...and some of my observations o7
 
 ## Ventura Notes
 
@@ -127,28 +130,24 @@ USB mapping is important, so consider using USBMap's QUICKSTART guide [here](htt
 
 For USB 3.0, consider using the [Inatek KT4004 PCIe expansion card](https://www.amazon.pl/Inateck-Karta-USB-porty-ExpresCard/dp/B00HJ1DULE?th=1), which has native support.
 
-To install macOS Ventura or newer successfully, you can now use `MacPro6,1` or `MacPro7,1` depending to your likings thanks to RestrictEvents v1.1.3:
+To install macOS successfully:
 
-- Use EFI from the `MP7,1_InstallEFI` folder (if USB detection issues persist, see the USB section at the end of this README).
+- Use EFI from the `EFI` folder (if USB detection issues persist, see the USB section at the end of this README).
 
-- Avoid using the present SMBIOS, as it's likely invalid. Regenerate MacPro7,1 with [GenSMBIOS](https://github.com/corpnewt/GenSMBIOS).
+- Avoid using the present SMBIOS, as it's likely invalid. Regenerate using [GenSMBIOS](https://github.com/corpnewt/GenSMBIOS) for working iServices.
 
-(^Technically both EFIs include both changes but sometimes it losts while maintaining this EFIs, so make sure to validate this one.)
-
-Regardless of your choice, it's recommended to use a hardware-matching SMBIOS for a smoother experience.
-
-## What Works
+## What Works?
 
 - Ethernet
 - Audio
 - USB (except internal USB3 ports)
 - iServices (iMessage, FaceTime, AppStore, iCloud, etc.)
 
-## What Doesn't Work
+## What Doesn't Work?
 
-- Internal USB3 ports
+- Internal USB3 ports, use PCIe ones, keep in mind they wont be visable by BIOS.
 - Sleep (Clicking sounds on wake-up attempt)
-- Fan Monitoring (needs to be manually mapped in config.plist)
+- Fan Monitoring (needs to be manually mapped in config.plist?)
 
 ## Credits
 
