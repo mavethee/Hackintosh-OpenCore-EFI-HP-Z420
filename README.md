@@ -4,9 +4,11 @@
 
 **Premade EFI of OpenCore bootloader for HP Z420 is here, running Ventura and Sonoma!**
 
-## Current Version: [OpenCore 0.9.9 DEBUG](https://github.com/acidanthera/OpenCorePkg/releases/tag/0.9.9)
+## Current Version: [OpenCore 1.0.0 DEBUG](https://github.com/acidanthera/OpenCorePkg/releases/tag/1.0.0) with [OCLP 1.5.0](https://github.com/dortania/OpenCore-Legacy-Patcher/releases/tag/1.5.0) running macOS 14.5 with success! :D
 
 This repository provides a complete "Plug-and-Play" EFI setup for the OpenCore bootloader, along with all necessary files to install and run macOS on an HP Z420.
+
+[![Download](https://img.shields.io/badge/Download-v1.0.0-brightgreen)](https://github.com/mavethee/Hackintosh-OpenCore-EFI-HP-Z420/releases/download/1.0.0/EFI.zip)
 
 ## Table of Contents
 - [Download](#download)
@@ -15,7 +17,7 @@ This repository provides a complete "Plug-and-Play" EFI setup for the OpenCore b
 - [Installation Guide](#installation)
 - [Notes for macOS Monterey if you insist](#monterey-notes)
 
-## Download
+## Cloning the repository:
 
 ```sh
 # Clone this repository:
@@ -42,19 +44,19 @@ Extract, put `EFI` on your USB.
 
 - If you face login sreen issues on 14.1+, stay on 14.0 or disable lockscren and set automatic login before updating to latest. (Seems to be something I've only personally faced, but noting for the record):
 
-`Apple logo -> System settings -> Users and Groups -> Automatic login`
+   `Apple logo` -> `System settings` -> `Users and Groups` -> `Automatic login`
 
-**FIXED:** Update to **macOS 14.4+** and Root Patch with **OpenCore Legacy Patcher 1.4.2+**
+   **FIXED:** Update to **macOS 14.4+** and Root Patch with latest OpenCore Legacy Patcher release (**1.4.2 fixed the issue, but latest is more than recommended**)
 
 2. Native dGPUs with AVX2 support are recommended. For Polaris and Vega dGPUs, root patching is required, but Navi GPUs are not supported.
 
 3. Lack of AVX2 requires CryptexFixup for macOS 13+.
 
-4. For Metal 1 dGPUs (e.g., Kepler), disable mediaanalysisd using `revblock=media` in NVRAM settings.
+4. For Metal 1 dGPUs (e.g., Kepler), disable `mediaanalysisd` using `revblock=media` in NVRAM settings.
 
 5. For non-AVX2 CPUs, disable f16c sysctl reporting by adding `revpatch=16c` to NVRAM settings.
 
-6. OCLP works with Ventura since 0.5.0+. for Sonoma, it's active development so latest OCLP 1.4.2+ is recommended.
+6. OCLP works with Ventura since 0.5.0+. for Sonoma, it's active development so latest OCLP 1.5.0 is recommended.
 
 7. While Legacy Metal dGPUs work for most part, there are still some issues.
 
@@ -116,7 +118,7 @@ If you're not interested in macOS 12, skip this step, [Installation Guide](#inst
 
 4. Reset NVRAM using `ResetNvramEntry.efi` in `EFI/OC/DRIVERS`.
 
-5. (Optional) For auto root patching your unsupported dGPU, add `AutoPkgInstaller.kext` to your `EFI/OC/KEXTS` from [here](https://github.com/dortania/OpenCore-Legacy-Patcher/blob/main/payloads/Kexts/Acidanthera/AutoPkgInstaller-v1.0.2-DEBUG.zip).
+5. (Optional) For auto root patching your unsupported dGPU, add `AutoPkgInstaller.kext` to your `EFI/OC/KEXTS` from [here](https://github.com/dortania/OpenCore-Legacy-Patcher/blob/main/payloads/Kexts/Acidanthera/AutoPkgInstaller-v1.0.3-DEBUG.zip).
 
 6. Flash your config.plist, reboot macOS, and launch OCLP.
 
