@@ -4,7 +4,7 @@
 
 **Premade EFI of OpenCore bootloader for HP Z420 is here, running Ventura and Sonoma!**
 
-## Current Version: [OpenCore 0.9.9 DEBUG](https://github.com/acidanthera/OpenCorePkg/releases/tag/0.9.9)
+## Current Version: [OpenCore 1.0.0 DEBUG](https://github.com/acidanthera/OpenCorePkg/releases/tag/1.0.0) with [OCLP 1.5.0](https://github.com/dortania/OpenCore-Legacy-Patcher/releases/tag/1.5.0) running macOS 14.5 with success! :D
 
 This repository provides a complete "Plug-and-Play" EFI setup for the OpenCore bootloader, along with all necessary files to install and run macOS on an HP Z420.
 
@@ -116,7 +116,7 @@ If you're not interested in macOS 12, skip this step, [Installation Guide](#inst
 
 4. Reset NVRAM using `ResetNvramEntry.efi` in `EFI/OC/DRIVERS`.
 
-5. (Optional) For auto root patching your unsupported dGPU, add `AutoPkgInstaller.kext` to your `EFI/OC/KEXTS` from [here](https://github.com/dortania/OpenCore-Legacy-Patcher/blob/main/payloads/Kexts/Acidanthera/AutoPkgInstaller-v1.0.2-DEBUG.zip).
+5. (Optional) For auto root patching your unsupported dGPU, add `AutoPkgInstaller.kext` to your `EFI/OC/KEXTS` from [here](https://github.com/dortania/OpenCore-Legacy-Patcher/blob/main/payloads/Kexts/Acidanthera/AutoPkgInstaller-v1.0.3-DEBUG.zip).
 
 6. Flash your config.plist, reboot macOS, and launch OCLP.
 
