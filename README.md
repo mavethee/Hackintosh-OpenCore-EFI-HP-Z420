@@ -12,6 +12,7 @@ This repository provides a complete "Plug-and-Play" EFI setup for the OpenCore b
 
 ## Table of Contents
 - [Download](#download)
+- [What about Sequoia?](#what-about-sequoia)
 - [What's Required to Make It Boot?](#whats-required-to-make-it-boot)
 - [Running macOS Ventura if you want](#ventura-notes)
 - [Installation Guide](#installation)
@@ -35,6 +36,20 @@ OR
 `Code` -> `Downaload ZIP`
 
 Extract, put `EFI` on your USB.
+
+## What about Sequoia?
+As last year, it's not a big jump between 14 and 15 like it was with Ventura which introduced AVX2 requirement.
+Not much news, development for needed 3D acceleration is going strong.
+
+![HP Z420 Sequoia Beta 1 Screenshot](Screenshots/HPZ420_SequoiaB1.png)
+
+As always will attach any good news in upcoming sources :D
+
+For Sonoma, keep scrolling ^^
+
+Sources:
+- [Sequoia Development branch of OCLP](https://github.com/dortania/OpenCore-Legacy-Patcher/compare/main...sequoia-development)
+- [macOS Sequoia Development PR](https://github.com/dortania/OpenCore-Legacy-Patcher/pull/1137)
 
 ## What's Required to Make It Boot?
 
