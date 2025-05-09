@@ -178,6 +178,8 @@
 			<false/>
 			<key>AvoidRuntimeDefrag</key>
 			<true/>
+			<key>ClearTaskSwitchBit</key>
+			<false/>
 			<key>DevirtualiseMmio</key>
 			<false/>
 			<key>DisableSingleUser</key>
@@ -1053,13 +1055,13 @@
 			<key>AdviseFeatures</key>
 			<true/>
 			<key>MLB</key>
-			<string>F5K330701QXFHDD1H</string>
+			<string>F5K618902QXFHDD1H</string>
 			<key>MaxBIOSVersion</key>
 			<false/>
 			<key>ProcessorType</key>
 			<integer>0</integer>
 			<key>ROM</key>
-			<data>tqlGuiOb</data>
+			<data>TESrkL2u</data>
 			<key>SpoofVendor</key>
 			<true/>
 			<key>SystemMemoryStatus</key>
@@ -1067,9 +1069,9 @@
 			<key>SystemProductName</key>
 			<string>MacPro6,1</string>
 			<key>SystemSerialNumber</key>
-			<string>F5KL4JZ8F9VM</string>
+			<string>F5KRNYZ7F9VM</string>
 			<key>SystemUUID</key>
-			<string>3B651F7D-8E99-4E35-A466-9128AB135F36</string>
+			<string>97A8EAD3-3649-4291-B047-297691A84B08</string>
 		</dict>
 		<key>UpdateDataHub</key>
 		<true/>
@@ -1413,6 +1415,8 @@
 			<true/>
 		</dict>
 		<key>ReservedMemory</key>
+		<array/>
+		<key>Unload</key>
 		<array/>
 	</dict>
 </dict>
