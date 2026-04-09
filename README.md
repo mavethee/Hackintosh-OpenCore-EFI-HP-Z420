@@ -4,7 +4,7 @@
 
 **Premade EFI of OpenCore bootloader for HP Z420 is here, running up to macOS 15!**
 
-## Current Version: [OpenCore 1.0.5 DEBUG](https://github.com/acidanthera/OpenCorePkg/releases/tag/1.0.5) with [OCLP 2.4.1](https://github.com/dortania/OpenCore-Legacy-Patcher/releases/tag/2.4.1) running macOS 15.7.1 with success! :D
+## Current Version: [OpenCore 1.0.7 DEBUG](https://github.com/acidanthera/OpenCorePkg/releases/tag/1.0.7) with [OCLP 2.4.1](https://github.com/dortania/OpenCore-Legacy-Patcher/releases/tag/2.4.1) running macOS 15.7.5 with success! :D
 
 >[!WARNING]
 > No support for macOS Tahoe yet.
@@ -29,7 +29,7 @@ a) Head to [release page](https://github.com/mavethee/Hackintosh-OpenCore-EFI-HP
 
 b) Pressing a download button below:
 
-[![Download](https://img.shields.io/badge/Download-v1.0.5-brightgreen)](https://github.com/mavethee/Hackintosh-OpenCore-EFI-HP-Z420/releases/download/1.0.5/EFI.zip)
+[![Download](https://img.shields.io/badge/Download-v1.0.7-brightgreen)](https://github.com/mavethee/Hackintosh-OpenCore-EFI-HP-Z420/releases/download/1.0.7/EFI.zip)
 
 c) Downloading zipped repository:
 
